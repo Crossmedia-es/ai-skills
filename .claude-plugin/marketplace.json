@@ -1,0 +1,21 @@
+{
+  "name": "crossmedia",
+  "owner": {
+    "name": "Cross-Media",
+    "url": "https://github.com/Crossmedia-es"
+  },
+  "description": "Cross-Media's agent skills, as an installable Claude Code plugin.",
+  "plugins": [
+    {
+      "name": "crossmedia-skills",
+      "source": "./",
+      "description": "Cross-Media's agent skills.",
+      "category": "engineering",
+      "keywords": [
+        "skills",
+        "agents",
+        "crossmedia"
+      ]
+    }
+  ]
+}

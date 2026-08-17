@@ -1,0 +1,12 @@
+.DS_Store
+__pycache__/
+*.pyc
+
+# Skills installed into this repo for testing — artifacts of `npx skills add .`,
+# removed by `mise clear`. The sources live in `skills/`.
+.agents/
+.claude/skills/
+.pi/
+skills-lock.json
+
+.claude/settings.local.json

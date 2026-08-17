@@ -1,0 +1,23 @@
+name: validate
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: jdx/mise-action@v2
+
+      - uses: pnpm/action-setup@v4
+
+      # `mise validate` shells out to `claude plugin validate . --strict`, so the CLI has to
+      # be present. Manifest validation is local, so no API key should be needed.
+      - name: Install Claude Code
+        run: pnpm add -g @anthropic-ai/claude-code
+
+      - run: mise validate

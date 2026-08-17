@@ -1,0 +1,17 @@
+{
+  "name": "crossmedia-skills",
+  "version": "0.1.0",
+  "description": "Cross-Media's agent skills.",
+  "author": {
+    "name": "Cross-Media"
+  },
+  "repository": "https://github.com/Crossmedia-es/ai-skills",
+  "keywords": [
+    "skills",
+    "agents",
+    "crossmedia"
+  ],
+  "skills": [
+    "./skills/project-rules"
+  ]
+}
