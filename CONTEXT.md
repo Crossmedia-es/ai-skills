@@ -49,9 +49,10 @@ round-trips to ClickUp, so a finished one is deleted and rebuilt by `get` when t
 _Avoid_: issue doc, local task, markdown ticket
 
 **Implementation checklist**:
-The `## Implementation` section of an Issue file — the work, ticked off by whichever skill implements
-the Issue, and pushed to ClickUp as part of the description for later audit.
-_Avoid_: notes, log, plan
+The `## Implementation` section of an Issue file. One artifact with a lifecycle: written before the
+build as unticked steps, ticked off by whichever skill implements the Issue, and pushed to ClickUp as
+part of the description, where it stands as the audit record.
+_Avoid_: notes, log, todo list
 
 ## Relationships
 
