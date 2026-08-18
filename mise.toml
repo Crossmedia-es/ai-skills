@@ -1,0 +1,41 @@
+[tasks.validate]
+description = "Check every skill and the plugin manifest. Read-only — fails on drift, never repairs."
+depends = ["validate:repo", "validate:plugin"]
+
+[tasks."validate:repo"]
+description = "Skill layout, frontmatter, and plugin.json drift"
+run = "python3 scripts/skills.py validate"
+
+[tasks."validate:plugin"]
+description = "Claude Code plugin and marketplace manifests"
+run = "claude plugin validate . --strict"
+
+# Named `sync-plugin`, not `sync`: `mise sync` is a built-in command, so a task called `sync`
+# is unreachable as `mise sync`. `mise generate`, `mise prune` and `mise fmt` are taken too.
+[tasks."sync-plugin"]
+description = "Rewrite plugin.json's skills array from the skills on disk. The only task that writes."
+run = "python3 scripts/skills.py sync"
+
+# Named `link-skills`, not `install`: `mise install` and `mise link` are both built-in commands.
+# Symlinks straight from `skills/` into the project's agent directories, with no installer
+# involved, so an edit to a Skill is live with nothing to re-run.
+[tasks."link-skills"]
+description = "Symlink this repo's skills into .claude, .agents and .pi for local testing."
+run = "python3 scripts/skills.py link"
+
+# Deletes the install artifacts directly, and never runs `npx skills remove`. Reproduced 2026-08-17
+# on skills@latest: install this repo into itself, then `npx skills remove --all`, and `skills/` is
+# emptied of its sources while the command reports "Successfully removed 1 skill(s)". The lockfile
+# records `"source": "."` in that setup; which code path does the deleting is untested.
+#
+# Every path below is a copy, a symlink, or a lockfile, and `skills/` appears nowhere.
+# `rmdir` refuses a non-empty directory, so `.claude/settings.local.json` survives.
+[tasks.clear]
+description = "Remove skills installed into this project, so a reinstall starts from zero."
+run = """
+rm -rf .agents/skills .claude/skills .pi/skills
+rm -f skills-lock.json
+rmdir .agents .pi 2>/dev/null || true
+echo
+echo "cleared. link them back with:  mise link-skills"
+"""

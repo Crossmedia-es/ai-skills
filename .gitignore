@@ -10,3 +10,7 @@ __pycache__/
 skills-lock.json
 
 .claude/settings.local.json
+
+# clickup-cli refuses to parse a project config without an `[auth] token`, so `.clickup.toml`
+# carries the token and cannot be committed. Each machine writes its own with `/issue setup`.
+.clickup.toml

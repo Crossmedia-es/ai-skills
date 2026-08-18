@@ -22,9 +22,9 @@ Given no mode, list these and stop.
 | Mode | Does |
 | --- | --- |
 | `setup` | Create `RULES.md` and point `AGENTS.md` at it. |
-| `add` | Add a rule. |
+| `add` | Put a rule the user asks for into force. |
+| `propose` | Propose rules from this session's corrections, and ask which to keep. |
 | `audit` | Report conflicts, overlaps, and rules to drop. |
-| `mode` | Change what the agent does after a correction. |
 
 ## setup
 
@@ -40,6 +40,9 @@ Done when `RULES.md` exists, `AGENTS.md` holds one `project-rules` block, and `C
 
 ## add
 
+The user asking for a rule *is* the decision that puts it into force, so `add` writes straight into
+the list. A rule the agent thought of itself goes through `propose`, which asks first.
+
 1. Read `RULES.md`.
 2. Where the new rule repeats an existing rule, contradicts one, or belongs inside one, propose that
    edit and wait for an answer.
@@ -48,32 +51,30 @@ Done when `RULES.md` exists, `AGENTS.md` holds one `project-rules` block, and `C
 Done when the rule is one item in `RULES.md`'s list, and no other item says the same thing or the
 opposite.
 
+## propose
+
+Runs when the user asks for it, and only then. `RULES.md` gains a rule when the user says so, so this
+mode ends in a question, never in a silent edit.
+
+1. Read `RULES.md`.
+2. Go back over this session and collect every correction — each point where the user redirected you,
+   and each mistake you caught yourself. Phrase one candidate rule per correction, as an imperative
+   short enough to sit on one line.
+3. Drop every candidate an in-force rule already covers, naming the rule that covers it.
+4. List what survives, numbered, and ask which to put into force. Add those and no others, following
+   `add`.
+
+A session with no corrections proposes nothing. Say so and stop, rather than inventing a rule to have
+something to show.
+
+Done when every correction in this session is a rule in `RULES.md`, named as already covered, or
+declined by the user.
+
 ## audit
 
 1. Read `RULES.md`.
 2. Report three lists — rules that contradict each other, rules saying one thing across several
    lines, and rules to drop.
-3. Ask about each rule under `## Proposed`: promote or delete.
-4. Edit only what the user approves.
+3. Edit only what the user approves.
 
-Done when every rule is listed or kept, and `## Proposed` is empty.
-
-## mode
-
-Ask with `AskUserQuestion`, so the user picks from a selectable control rather than typing a number.
-One question, `header: Self-propose`, and these three options with `propose` first as the recommended
-one:
-
-| label | description |
-| --- | --- |
-| `propose` | Recommended. After a correction, append the rule to `## Proposed` in `RULES.md`. |
-| `ask` | Name the rule in chat and write nothing. |
-| `off` | Do neither. |
-
-Where `AskUserQuestion` is missing — every Agent target other than `claude-code`, and any Claude Code
-session that denies the tool — ask the same three as a numbered list.
-
-Then replace the self-proposal line in the `AGENTS.md` block with the matching one from
-[`templates/agents-block.md`](templates/agents-block.md).
-
-Done when the block holds one such line, or none for `off`.
+Done when every rule is either listed in that report or left alone.

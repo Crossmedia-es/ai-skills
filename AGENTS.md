@@ -34,9 +34,5 @@ tool names, subagent types) makes a Skill silently weaker on `codex`, `opencode`
 <!-- project-rules:start -->
 ## Rules
 
-Read `RULES.md` now and follow every rule in it. Rules under its `## Proposed` heading are not in
-force.
-
-When the user corrects you, name the rule that would have prevented the correction and ask whether to
-add it to `RULES.md`.
+Read `RULES.md` now and follow every rule in it.
 <!-- project-rules:end -->

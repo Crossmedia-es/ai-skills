@@ -36,6 +36,23 @@ _Avoid_: in-progress, draft, WIP, experimental
 One imperative line in `RULES.md` constraining how an agent works in a repo.
 _Avoid_: instruction, guideline, constraint, convention, standard
 
+### issue
+
+**Issue**:
+One work item tracked in ClickUp. ClickUp's own API calls it a task, which is why the commands read
+`clickup-cli task …`.
+_Avoid_: ticket, story, card, task
+
+**Issue file**:
+An Issue's local markdown copy, `docs/issues/<id>-<slug>.md`. Disposable — everything in it
+round-trips to ClickUp, so a finished one is deleted and rebuilt by `get` when the work reopens.
+_Avoid_: issue doc, local task, markdown ticket
+
+**Implementation checklist**:
+The `## Implementation` section of an Issue file — the work, ticked off by whichever skill implements
+the Issue, and pushed to ClickUp as part of the description for later audit.
+_Avoid_: notes, log, plan
+
 ## Relationships
 
 - This library holds many **Skills**; each **Skill** installs to one or more **Agent targets**
