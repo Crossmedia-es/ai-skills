@@ -2,8 +2,6 @@
 name: issue
 description: The ClickUp Issue family — which Skill does what, plus the shared contract they all read. Prints one Issue to the terminal with `read`.
 disable-model-invocation: true
-metadata:
-  internal: true
 ---
 
 # issue

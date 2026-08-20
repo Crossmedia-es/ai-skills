@@ -1,9 +1,7 @@
 ---
 name: issue-refine
 description: Interview the user about one Issue, then write its Specification and its Implementation checklist — the steps an agent builds from. Refines only; never implements, never pushes.
-disable-model-invocation: true
-metadata:
-  internal: true
+disable-model-invocation: false
 ---
 
 # issue-refine

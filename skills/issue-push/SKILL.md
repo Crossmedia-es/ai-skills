@@ -2,8 +2,6 @@
 name: issue-push
 description: Send existing Issue files up to ClickUp as the Issue's description. Takes several ids at once, writes no other field, and stops on someone else's edit.
 disable-model-invocation: true
-metadata:
-  internal: true
 ---
 
 # issue-push

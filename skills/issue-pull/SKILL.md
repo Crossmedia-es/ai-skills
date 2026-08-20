@@ -1,9 +1,7 @@
 ---
 name: issue-pull
 description: Download Issues into Issue files — writing the file where none exists, refreshing what ClickUp owns where one does. Takes several at once, and asks before it replaces a local description.
-disable-model-invocation: true
-metadata:
-  internal: true
+disable-model-invocation: false 
 ---
 
 # issue-pull

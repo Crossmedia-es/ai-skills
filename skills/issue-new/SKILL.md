@@ -1,9 +1,7 @@
 ---
 name: issue-new
 description: Raise a Draft in ClickUp — create the task, send its description, rename the file with the assigned id. Takes titles or paths, several at once.
-disable-model-invocation: true
-metadata:
-  internal: true
+disable-model-invocation: false 
 ---
 
 # issue-new

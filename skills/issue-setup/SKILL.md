@@ -2,8 +2,6 @@
 name: issue-setup
 description: Prepare a project for the ClickUp Issue skills — authenticate the CLI, pick the list, and write docs/issues/TEMPLATE.md.
 disable-model-invocation: true
-metadata:
-  internal: true
 ---
 
 # issue-setup
