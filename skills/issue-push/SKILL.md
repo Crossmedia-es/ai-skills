@@ -1,7 +1,7 @@
 ---
 name: issue-push
 description: Send existing Issue files up to ClickUp as the Issue's description. Takes several ids at once, writes no other field, and stops on someone else's edit.
-disable-model-invocation: true
+disable-model-invocation: false
 ---
 
 # issue-push
@@ -9,8 +9,8 @@ disable-model-invocation: true
 Send an **Issue file**'s `##` sections to ClickUp as the Issue's description. Write no other field:
 the one flag this Skill passes is `--description-file`.
 
-Read [`../issue/CLICKUP-CLI.md`](../issue/CLICKUP-CLI.md). That file and this one are the whole
-brief — read no third. Where the `issue` Skill is missing, say so and stop.
+Read `.issue/clickup.md`, this project's copy of the ClickUp contract. That file and this one are the
+whole brief — read no third. Missing, say `/issue-setup` and stop.
 
 ## Input
 

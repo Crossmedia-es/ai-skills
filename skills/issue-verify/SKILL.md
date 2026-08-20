@@ -8,8 +8,8 @@ disable-model-invocation: true
 
 Judge one **Issue** against the repo: is it built, all of it, and the way the Issue said?
 
-Read the Issue file and the code. The `issue` Skill's contract is not needed — this Skill never calls
-`cup`, and reads no other Skill.
+Read the Issue file and the code. The ClickUp contract is not needed — this Skill never calls `cup`,
+and reads no other Skill.
 
 **Report only.** Write no project code and fix nothing. A gap is a finding with a command attached,
 not work to do here.

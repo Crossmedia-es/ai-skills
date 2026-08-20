@@ -8,9 +8,8 @@ disable-model-invocation: true
 
 Close the loop on one **Issue**: send the file up, move the board, delete the file.
 
-Read [`../issue/CLICKUP-CLI.md`](../issue/CLICKUP-CLI.md) and
-[`../issue-push/SKILL.md`](../issue-push/SKILL.md). Those two and this file are the whole brief — read
-no fourth. Where either Skill is missing, say so and stop.
+Read `.issue/clickup.md`, this project's copy of the ClickUp contract. That file and this one are the
+whole brief — read no third. Missing, say `/issue-setup` and stop.
 
 **This is the one Skill that writes a status.** Everywhere else the board is ClickUp's, changed in
 the UI. Here it moves because the user answered a question naming the status they want, in the run
@@ -34,8 +33,8 @@ Each step ends in an answer from the user. Read it before starting the next one.
 1. **Check the checklist.** Count the `- ⬜ ` items. One or more: say how many, name them, and say
    `/issue-verify <id>`. Confirm before going on — an Issue closed over pending steps is a lie the
    board keeps telling.
-2. **Push.** Follow `/issue-push`'s steps for this id. A **drift** stops this run: resolve it there
-   and start again. Confirm ClickUp holds the description before step 3.
+2. **Push.** Run `/issue-push <id>` and let it do the work. A **drift** stops this run: resolve it
+   there and start again. Confirm ClickUp holds the description before step 3.
 3. **Move the status.** Run `cup tasks --list <list_id> --all --json` and collect the distinct
    `status` values — that is the only way to learn what this list accepts. Offer them, marking which
    read as review and which as closed, plus **leave it alone**. On an answer, run

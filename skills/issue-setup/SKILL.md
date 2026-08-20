@@ -1,20 +1,22 @@
 ---
 name: issue-setup
-description: Prepare a project for the ClickUp Issue skills — authenticate the CLI, pick the list, and write docs/issues/TEMPLATE.md.
+description: Prepare a project for the ClickUp Issue skills — authenticate the CLI, pick the list, and write the Issue template and the ClickUp contract.
 disable-model-invocation: true
 ---
 
 # issue-setup
 
-`/issue-setup` runs once per project. It leaves behind one file, `docs/issues/TEMPLATE.md`, holding
-the `list_id` and the shape of an **Issue file**.
+`/issue-setup` takes no argument and leaves behind two files. Given an argument, ignore it and say so.
 
-Read [`../issue/CLICKUP-CLI.md`](../issue/CLICKUP-CLI.md). That file and this one are the whole
-brief — read no third. Where the `issue` Skill is missing, say so and stop.
+| File | Holds | On a re-run |
+| --- | --- | --- |
+| `docs/issues/TEMPLATE.md` | The `list_id`, the `assignee_id`, and the shape of an **Issue file**. | Merged — the project edits the shape. |
+| `.issue/clickup.md` | The ClickUp contract every Skill that calls `cup` reads. | Overwritten — nobody edits it. |
 
-## Input
+Re-running this Skill is how a project catches up with a newer version of the family, so it is safe
+to run again at any time.
 
-Takes no argument. Given one, ignore it and say so.
+Read [`CLICKUP-CLI.md`](CLICKUP-CLI.md). That file and this one are the whole brief — read no third.
 
 ## Steps
 
@@ -26,19 +28,17 @@ Takes no argument. Given one, ignore it and say so.
    hand over both. The token comes from https://app.clickup.com/settings/apps. It goes to
    `~/.config/cup/config.json` — never into the repo.
 4. `cup spaces --json`, then `cup lists <spaceId> --json`, which reaches lists inside folders too and
-   names the folder on each row. Ask which list this project files its Issues in.
-5. Copy [`../issue/templates/issue.md`](../issue/templates/issue.md) to `docs/issues/TEMPLATE.md`.
-   Write the list id into `list_id`, and step 2's `user.id` into `assignee_id`. Where the file
-   already exists, change those two keys alone — the block between the `template` markers is the
-   project's to edit.
-6. Print the workspace, space and list names you resolved.
-
-## Limits
-
-- Ask which list. Never infer one from the repo name, the branch or an existing file.
-- Write `docs/issues/TEMPLATE.md`. Touch no other file.
+   names the folder on each row. Ask which list this project files its Issues in — never infer one
+   from the repo name, the branch or an existing file.
+5. Copy [`templates/issue.md`](templates/issue.md) to `docs/issues/TEMPLATE.md`. Write the list id
+   into `list_id`, and step 2's `user.id` into `assignee_id`. Where the file already exists, write
+   those two keys, add either one that is absent, and leave the rest alone — the block between the
+   `template` markers is the project's to edit.
+6. Copy [`CLICKUP-CLI.md`](CLICKUP-CLI.md) to `.issue/clickup.md`, replacing it whole. This copy is
+   the Skill's, not the project's: an edit here is lost on the next run, and belongs in the Skill.
+7. Print the workspace, space and list names you resolved, and both paths written.
 
 ## Done when
 
-`docs/issues/TEMPLATE.md` exists, its frontmatter holds a `list_id` and an `assignee_id`, it holds no
-token, and `cup auth` succeeds.
+`docs/issues/TEMPLATE.md` holds a `list_id` and an `assignee_id`, `.issue/clickup.md` matches the
+Skill's copy byte for byte, neither holds a token, and `cup auth` succeeds. No other file changed.

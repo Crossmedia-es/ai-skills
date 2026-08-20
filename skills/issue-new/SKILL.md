@@ -8,8 +8,8 @@ disable-model-invocation: false
 
 Give a **Draft** an id. This is the only Skill that creates an Issue in ClickUp.
 
-Read [`../issue/CLICKUP-CLI.md`](../issue/CLICKUP-CLI.md). That file and this one are the whole
-brief — read no third. Where the `issue` Skill is missing, say so and stop.
+Read `.issue/clickup.md`, this project's copy of the ClickUp contract. That file and this one are the
+whole brief — read no third. Missing, say `/issue-setup` and stop.
 
 ## Input
 

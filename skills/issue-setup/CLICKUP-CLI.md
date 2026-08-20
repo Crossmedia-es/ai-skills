@@ -1,8 +1,11 @@
 # The ClickUp contract
 
-What `cup` and ClickUp do that `--help` does not say. Every Skill in the `issue` family reads this
-before its first step. The binary is `cup`, from
+What `cup` and ClickUp do that `--help` does not say. The binary is `cup`, from
 [`@krodak/clickup-cli`](https://github.com/krodak/clickup-cli).
+
+This file has two homes. It ships inside `/issue-setup`, which copies it to `.issue/clickup.md` in the
+project it sets up. Every other Skill that calls `cup` reads that project copy before its first step,
+and re-running `/issue-setup` is how the copy catches up with a newer Skill.
 
 ## JSON
 
@@ -54,6 +57,10 @@ never guessed.
 `cup update` will set a title and a parent too, and no Skill here passes those flags. A status pushed
 from a file is a status moved by whoever last ran a command — which is why the one exception asks
 first and reports the status ClickUp ended up with.
+
+Two acts have exactly one door each. `/issue-new` is the only Skill that creates an Issue, which is
+why `/issue-push` refuses a file with no id and `/issue-pull` refuses to invent one. `/issue-done` is
+the only Skill that moves a status, and only to one the user named in that run.
 
 ClickUp stores **one** description per Issue, and an Issue file's `##` sections in the file's own
 order are that description. There is no per-section API and no split to maintain.

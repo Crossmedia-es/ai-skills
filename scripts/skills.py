@@ -67,6 +67,58 @@ def read_frontmatter(path: Path) -> dict[str, str]:
     return out
 
 
+LINK = re.compile(r"\]\(([^)\s]+)\)")
+CODE_SPAN = re.compile(r"`[^`]*`")
+FENCE = re.compile(r"^\s*(```|~~~)")
+
+
+def prose(text: str) -> list[tuple[int, str]]:
+    """Numbered lines with the code stripped out.
+
+    A link inside a fence or a backtick span is a sample of what a file looks like, not a
+    pointer to one, so it is not ours to resolve.
+    """
+    out: list[tuple[int, str]] = []
+    fenced = False
+    for number, line in enumerate(text.splitlines(), 1):
+        if FENCE.match(line):
+            fenced = not fenced
+            continue
+        if not fenced:
+            out.append((number, CODE_SPAN.sub("", line)))
+    return out
+
+
+def check_links(skill: Skill) -> list[str]:
+    """Every relative link in a Skill must resolve, and must stay inside the Skill.
+
+    Both failures look identical on disk and only bite after install: `npx skills` copies one
+    Skill directory at a time, so a link out to a sibling points at a file that never landed.
+    Shared material is carried by the Skill that needs it, or written into the project by
+    `/issue-setup` — never reached across a directory boundary.
+    """
+    errors: list[str] = []
+    home = skill.dir.resolve()
+    for md in sorted(skill.dir.rglob("*.md")):
+        for number, line in prose(md.read_text(encoding="utf-8")):
+            for target in LINK.findall(line):
+                if "://" in target or target.startswith(("#", "mailto:")):
+                    continue
+                path = target.split("#", 1)[0]
+                if not path:
+                    continue
+                where = f"{rel(md)}:{number}"
+                resolved = (md.parent / path).resolve()
+                if not resolved.exists():
+                    errors.append(f"{where}: `{target}` resolves to nothing")
+                elif home != resolved and home not in resolved.parents:
+                    errors.append(
+                        f"{where}: `{target}` leaves `{skill.dir.name}` — installed on its own, "
+                        f"that Skill points at a file nobody copied"
+                    )
+    return errors
+
+
 def find_skills() -> tuple[list[Skill], list[str]]:
     """Walk `skills/`, stopping at any directory holding a SKILL.md.
 
@@ -117,6 +169,7 @@ def cmd_validate() -> int:
             )
         if not skill.description:
             errors.append(f"{rel(skill.path)}: frontmatter has no `description` — it can never trigger")
+        errors.extend(check_links(skill))
 
     if not PLUGIN_JSON.is_file():
         errors.append(f"{rel(PLUGIN_JSON)}: missing")
@@ -138,7 +191,10 @@ def cmd_validate() -> int:
         return 1
 
     internal = sum(1 for s in skills if s.internal)
-    print(f"OK {len(skills)} skills ({internal} internal), plugin manifest in step")
+    print(
+        f"OK {len(skills)} skills ({internal} internal), every link inside its Skill, "
+        f"plugin manifest in step"
+    )
     return 0
 
 

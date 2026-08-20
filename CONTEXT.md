@@ -59,6 +59,12 @@ One Issue whose local description and ClickUp's disagree. `/issue-pull` reports 
 side wins; `/issue-push` stops on one rather than overwrite it.
 _Avoid_: conflict, diff, mismatch, out of sync
 
+**Contract**:
+The ClickUp behaviour `cup --help` does not document. Ships inside `/issue-setup`, which writes it to
+`.issue/clickup.md` in each project; every Skill that calls `cup` reads that copy. Re-running
+`/issue-setup` refreshes it.
+_Avoid_: docs, notes, CLI reference, spec
+
 **Implementation checklist**:
 The `## Implementation` section of an Issue file, and the first section in it. One artifact with a lifecycle: written before the
 build as unticked steps, ticked off by whichever skill implements the Issue, and pushed to ClickUp as

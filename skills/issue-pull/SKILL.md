@@ -8,8 +8,8 @@ disable-model-invocation: false
 
 Bring ClickUp down to `docs/issues/`. Write nothing back.
 
-Read [`../issue/CLICKUP-CLI.md`](../issue/CLICKUP-CLI.md). That file and this one are the whole
-brief — read no third. Where the `issue` Skill is missing, say so and stop.
+Read `.issue/clickup.md`, this project's copy of the ClickUp contract. That file and this one are the
+whole brief — read no third. Missing, say `/issue-setup` and stop.
 
 ## Input
 
@@ -23,6 +23,8 @@ Several arguments. `/issue-pull 154 155 XP-1554` is one run, and one failure nev
 | An id ClickUp does not know | Skip it. Report it. Creating it is `/issue-new`. |
 | Nothing given | Every Issue file already in `docs/issues/`. Write no new file. |
 | `--status <name>` or `--with-subtasks` | Read [`FILTERS.md`](FILTERS.md) first. |
+| An id and `--print` | That Issue, to the terminal. Write no file. See **Print**. |
+| `--print` with no id | Say an id is needed. Printing every Issue file is not a question anyone asked. |
 | An id and `--status` together | Say they ask for two different things. Stop. |
 
 ## Steps
@@ -39,6 +41,18 @@ Per Issue. Print one table at the end.
    keeping its `##` headings and their order.
 4. **A file already.** Write `status`, title, `type`, `parent`, the relations and `date_updated`.
    Rename the file where the title changed. Then check for drift.
+
+## Print
+
+`--print` answers a question about one Issue without leaving a file behind — for an Issue this project
+has no reason to keep on disk, and for a Skill that needs one fact rather than a file.
+
+Run step 1, then print the frontmatter fields as a table, the status name **and whether it closes an
+Issue** from `status.type`, and the description as it came. A caller asking "is this built?" cannot
+answer that from a status name, because the names are per-list.
+
+Steps 2 to 4 and the drift check are skipped. Where an Issue file for this id already exists, say so,
+print anyway, and leave the file alone — resolving a difference is a pull without `--print`.
 
 ## Drift
 
@@ -69,4 +83,5 @@ One table — id, status before, status after, drift, path — then the failures
 ## Done when
 
 Every Issue named has a file; every file carries ClickUp's `status`, title, `type`, `parent`,
-relations and `date_updated`; and every drift was either resolved by an answer or left by one.
+relations and `date_updated`; and every drift was either resolved by an answer or left by one. Under
+`--print`, the Issue is on screen and `docs/issues/` is unchanged.

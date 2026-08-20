@@ -12,7 +12,6 @@
     "crossmedia"
   ],
   "skills": [
-    "./skills/issue",
     "./skills/issue-done",
     "./skills/issue-new",
     "./skills/issue-pull",

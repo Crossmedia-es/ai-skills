@@ -1,6 +1,6 @@
 ---
 name: issue-refine
-description: Interview the user about one Issue, then write its Specification and its Implementation checklist — the steps an agent builds from. Refines only; never implements, never pushes.
+description: Refine one Issue into a Specification and an Implementation checklist an agent can build from. Use when an Issue needs a spec, its scope is undecided, or its checklist is missing.
 disable-model-invocation: false
 ---
 
@@ -13,14 +13,8 @@ of steps short enough to follow and specific enough to be wrong.
 **Document only.** The only file this Skill changes is the target's Issue file. Write no project
 code, run no build.
 
-This Skill knows nothing about the tracker. Call `/issue read`, `/issue-pull` and `/issue-push`
-rather than any tracker command, and where `issue` is not installed, say so and stop.
-
-## Output
-
-A round is numbered questions and nothing else. The closing report is the file path, a table of the
-sections written, and the findings that need a decision. No account of what the Skill did, and no
-summary of the Issue back to the person who just answered questions about it.
+This Skill knows nothing about the tracker. Call `/issue-pull` and `/issue-push` rather than any
+tracker command, and where neither is installed, say so and stop.
 
 ## Not this Skill's work
 
@@ -41,8 +35,8 @@ one side.
 
 ## 1. Resolve the Issue
 
-One Issue per run. Refinement is a conversation, and five at once is five interleaved conversations
-whose answers contaminate each other. A parent whose subtasks all need refining is that many runs.
+One Issue per run — five at once is five interleaved conversations whose answers contaminate each
+other. A parent whose subtasks all need refining is that many runs.
 
 - **No id given** — stop, and say which Issue you need. A **Draft** with no id is `/issue-new`'s to
   raise first. Never guess an Issue from the branch name.
@@ -53,10 +47,11 @@ whose answers contaminate each other. A parent whose subtasks all need refining 
 Never ask what a document already answers. Read:
 
 - The Issue file whole, and every related Issue — `parent`, `subtasks`, `blocked_by`, `blocks`. One
-  already in `docs/issues/` is read from disk; the rest come from `/issue read <id>`, which prints
-  without leaving a file behind.
-- `CONTEXT.md` for the project's vocabulary, and `RULES.md` for how work is done here. The Issue is
-  written in the project's language or it is written wrong.
+  already in `docs/issues/` is read from disk; the rest come from `/issue-pull <id> --print`, which
+  prints without leaving a file behind.
+- `CONTEXT.md` for the project's vocabulary, and `RULES.md` for how work is done here. Where the repo
+  holds more than one `CONTEXT.md`, follow `CONTEXT-MAP.md` to the one covering this Issue. The Issue
+  is written in the project's language, and so are the questions, or both are written wrong.
 - The code the Issue touches. Dispatch this as background exploration and carry on — only the
   questions that depend on it wait.
 
@@ -66,14 +61,13 @@ Done when every related Issue has been read and you can name what you scanned fo
 
 ## 3. Gate on status
 
-`/issue read <id>` reports whether the Issue's status closes it. Status names are per-list, so take
-that verdict rather than reading the name.
+`/issue-pull <id> --print` reports whether a status closes an Issue. Status names are per-list, so
+take that verdict rather than reading the name — here and everywhere below.
 
 - **Closed** — the Issue is built. Say so, and refine it only if the user asks for the built Issue to
   change. Otherwise offer a new Issue.
 - **Open, with ✅ items already in the checklist** — work is under way. Warn that refining mid-flight
   can invalidate work already done, and confirm before going on.
-- **Otherwise** — proceed.
 
 ## 4. Analyse
 
@@ -87,9 +81,10 @@ Read-only. Bring findings and open questions, not homework.
   that covers the behaviour. An Issue whose only honest check is "look at it" is not a defect: say so
   now, because finding it out after the build costs more.
 - **Dependencies** — take `blocked_by` and `blocks` off the frontmatter and resolve every id to a
-  status with `/issue read <id>`, which reports whether that status closes the Issue. Report each one:
-  an open `blocked_by` means the build waits, and every `blocks` entry is an Issue whose plan rests on
-  this one. A closed `blocked_by` blocks nothing — say so in one line and move on.
+  status with `/issue-pull <id> --print`. Report each one: an open `blocked_by` means the build waits,
+  and
+  every `blocks` entry is an Issue whose plan rests on this one. A closed `blocked_by` blocks
+  nothing — say so in one line and move on.
 - **Order** — work this Issue assumes already exists with no `blocked_by` recording it. Name the Issue
   it rests on, by id and status, and say the edge is added in the ClickUp UI.
 - **Conflicts** — among the Issues read in step 2: two Issues changing the same file or identifier,
@@ -103,13 +98,29 @@ Read-only. Bring findings and open questions, not homework.
 Ask in rounds. Each round is the questions whose answers do not depend on another question still
 open — a question that does belongs to the next round, not this one.
 
-Number each question, state it in one line, and give the answer you would pick:
+Number each question. Give it a topic, then the question, then the answer you would pick:
 
 ```
-1. <question> — I would <recommended answer>, because <one line>.
+1. **<topic — three or four words>**
+   <the question, one idea, plain words>
+   I would <answer>, because <one line>.
 ```
 
 Then wait. Write nothing until the answers are in.
+
+**The question carries the context.** The user has not read what you just read. A question that only
+makes sense with the Issue file open is a question you have to re-ask — so the topic line says what
+this is about before the question asks anything.
+
+**One idea per question.** A question holding an "and" is two questions. Split it and number both.
+
+**Plain words** are ASD-STE100 Simplified Technical English: active voice, present tense, one idea
+per sentence, one clause where two would do, and the same word for the same thing every time. Use the
+project's terms from `CONTEXT.md`. A term that is in neither `CONTEXT.md` nor the Issue gets a
+four-word gloss the first time you use it.
+
+The test: read the round back with the Issue file closed. Anything you cannot answer from the page is
+not ready to send.
 
 **The floor: a Specification.** Most Issues arrive as a title and nothing else. That is normal, and
 it is why this Skill asks before it writes. Keep asking until you can state, in your own words and
@@ -135,9 +146,8 @@ others — a new section is a change to that file, not to this run.
 Leave out a section with nothing true to say in it. `## Specification` is the one exception: an Issue
 without one is not refined, so go back to step 5.
 
-**Write for a human in a hurry.** Use ASD-STE100 Simplified Technical English: one idea per sentence,
-active voice, present tense, and the same word for the same thing every time. Short beats complete —
-a section nobody finishes is a section nobody read.
+**Write for a human in a hurry.** Use the same **plain words** step 5 asked in. Short beats
+complete — a section nobody finishes is a section nobody read.
 
 **Show every change before making it.** Where a section already holds text, show what changes and
 confirm. Someone wrote it, and what they wrote is evidence about what they meant.
@@ -160,7 +170,7 @@ two wrong answers.
 One `- ⬜ ` line per step, imperative, naming the file or symbol it touches —
 `- ⬜ Add read mode to skills/issue/SKILL.md, printing instead of writing`. Paths belong here: this
 is a build order consumed within days by an agent that needs to know where to type. A step that will
-not fit on one line is two steps, and the tracker mangles a wrapped line anyway.
+not fit on one line is two steps.
 
 The checklist is the sequence. The reasoning is in `## Specification`.
 
@@ -182,10 +192,13 @@ The user places these. `/issue-new` is their command to run.
 
 ## 7. Report
 
-The file path, and the line count against the 85-line ceiling. A table of the sections written. Every
-Draft you wrote, by path. Every open `blocked_by` and every `blocks`, by id and status. Then, and only
+The file path, and the line count against the ceiling. A table of the sections written. Every Draft
+you wrote, by path. Every open `blocked_by` and every `blocks`, by id and status. Then, and only
 where there is something to say: conflicts by id, ordering findings, a ticked line the new plan
 contradicts, the questions left unanswered, and what you scanned for.
+
+That list is the whole report: no account of what the Skill did, and no summary of the Issue back to
+the person who just answered questions about it.
 
 Close with `/issue-push <id>`. Nothing was built and nothing was sent, so no status changes here.
 
@@ -194,5 +207,4 @@ Close with `/issue-push <id>`. Nothing was built and nothing was sent, so no sta
 The Issue file holds a Specification you could hand to a stranger, a checklist of twelve steps or
 fewer, a home for every out-of-scope item, and 85 lines or fewer in total. Every `blocked_by` and
 `blocks` entry is resolved to a status and reported. Every slice the user agreed to is a Draft on
-disk, named in the report. Or the report names which of those the Issue
-cannot yet satisfy, and why.
+disk, named in the report. Or the report names which of those the Issue cannot yet satisfy, and why.
