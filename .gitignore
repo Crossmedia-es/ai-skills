@@ -11,6 +11,6 @@ skills-lock.json
 
 .claude/settings.local.json
 
-# clickup-cli refuses to parse a project config without an `[auth] token`, so `.clickup.toml`
-# carries the token and cannot be committed. Each machine writes its own with `/issue setup`.
+# `.clickup.toml` is obsolete — `list_id` now lives in `docs/issues/TEMPLATE.md`, which is committed.
+# The path stays ignored because copies written against the old clickup-cli carry an `[auth] token`.
 .clickup.toml

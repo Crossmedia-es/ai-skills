@@ -39,3 +39,15 @@ rmdir .agents .pi 2>/dev/null || true
 echo
 echo "cleared. link them back with:  mise link-skills"
 """
+
+# Unit tests only — pure functions against fixtures captured from real `cup`
+# output. No network, no auth, so this is what CI can run.
+[tasks.test]
+description = "Run the skill wrappers' unit tests."
+run = "node --test tests/*.test.ts"
+
+# The same suite plus the tests that spawn the real CLI against real ClickUp.
+# Needs `cup init` done, and depends on tickets other people can edit.
+[tasks."test:live"]
+description = "Unit tests plus the live tests that hit ClickUp."
+run = "ISSUE_LIVE=1 node --test tests/*.test.ts"

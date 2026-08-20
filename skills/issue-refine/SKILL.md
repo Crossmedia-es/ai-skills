@@ -9,7 +9,7 @@ metadata:
 # issue-refine
 
 `/issue-refine <id>` turns one **Issue** into an Issue file someone else could build from without
-inventing a spec: a `## Description` that decides the approach, and an **Implementation checklist**
+inventing a spec: a `## Specification` that decides the approach, and an **Implementation checklist**
 of steps short enough to follow and specific enough to be wrong.
 
 Most Issues arrive as a title and nothing else. That is normal, and it is why this skill asks
@@ -19,8 +19,8 @@ questions before it writes any.
 changes is the target's Issue file.
 
 This skill knows nothing about the tracker. Fetching, writing and pushing Issue files is the `issue`
-skill's job — call `/issue read`, `/issue get` and `/issue push` rather than any tracker command, and
-where `issue` is not installed, say so and stop. `docs/adr/0002-the-issue-file-belongs-to-the-tracker.md`
+skill's job — call `/issue read`, `/issue-pull` and `/issue-push` rather than any tracker command,
+and where `issue` is not installed, say so and stop. `docs/adr/0002-the-issue-file-belongs-to-the-tracker.md`
 records why the line sits there.
 
 ## Output
@@ -36,10 +36,10 @@ Each of these is a finding with a command attached, never an action taken here:
 
 | Found | Say |
 | --- | --- |
-| The Issue is too big for one build | Name the slices you would cut. `/issue add --parent <id>` raises them. |
+| The Issue is too big for one build | Name the slices you would cut. `/issue-new` raises them. |
 | A sibling Issue conflicts | Name it by id. `/issue-refine <other-id>` fixes it there. |
 | A term belongs in the glossary, or a decision in an ADR | Name it. Writing it is the user's call. |
-| The refined Issue is ready to leave the laptop | `/issue push <id>` |
+| The refined Issue is ready to leave the laptop | `/issue-push <id>` |
 
 Never edit another Issue's file. The other Issue may be the correct one, and this skill only heard
 one side.
@@ -49,10 +49,9 @@ one side.
 One Issue per run. Refinement is a conversation, and five at once is five interleaved conversations
 whose answers contaminate each other. A parent whose subtasks all need refining is that many runs.
 
-- **No id given** — stop. An Issue exists in the tracker before it exists here, so say
-  `/issue add "<title>"` first, then refine the id it returns. Do not guess at an Issue from the
-  branch name.
-- **No Issue file for that id** — run `/issue get <id>` and refine the file it writes.
+- **No id given** — stop. Refinement works on one named Issue, so say which. A draft with no id yet
+  is `/issue-new`'s to raise first. Do not guess at an Issue from the branch name.
+- **No Issue file for that id** — run `/issue-pull <id>` and refine the file it writes.
 
 ## 2. Read before asking
 
@@ -65,6 +64,9 @@ Never ask what a document already answers. Read:
   written in the project's language or it is written wrong.
 - The code the Issue touches. Dispatch this as background exploration and carry on — only the
   questions that depend on it wait.
+
+Read what this step names, and stop there. `docs/adr/` is history, not input; the repo at large is
+not a source of scope.
 
 Report what you scanned for at the end, so a gap is visible rather than silent.
 
@@ -116,16 +118,15 @@ to look thorough.
 
 ## 6. Write
 
-Once, at the end, from everything heard. Write the sections
-[the Issue template](../issue/templates/issue.md) defines, and no others — the template decides what
-an Issue file holds, and adding a section is a change to the `issue` skill.
+Once, at the end, from everything heard. Write the sections `docs/issues/TEMPLATE.md` defines, and no others — the template decides what an
+Issue file holds, and adding a section is a change to that file.
 
 | Section | Holds |
 | --- | --- |
-| `## Description` | The problem, the solution, and the decisions taken. Name modules and behaviour; no file paths — this section outlives the build and a path goes stale first. |
+| `## Implementation` | The checklist. Unticked steps, in build order. |
+| `## Specification` | The problem, the solution, and the decisions taken. Name modules and behaviour; no file paths — this section outlives the build and a path goes stale first. |
 | `## Testing Decisions` | The seam from step 4, what passing there proves, and prior art for the test. Or, plainly, that no automated check settles it. |
 | `## Out of Scope` | What this Issue does not cover. This is what stops a build sprawling. |
-| `## Implementation` | The checklist. Unticked steps, in build order. |
 
 A section with nothing true to say in it is left out, not left empty.
 
@@ -134,7 +135,7 @@ A section with nothing true to say in it is left out, not left empty.
 because this is a build order consumed within days by an agent that needs to know where to type. A
 step that will not fit on one line is two steps; and a wrapped line is mangled by the tracker anyway.
 
-The checklist is the sequence, not the argument. The reasoning is in `## Description`.
+The checklist is the sequence, not the argument. The reasoning is in `## Specification`.
 
 **Ticks survive.** A `- ✅ ` line records work that happened and code that exists. Carry it through
 untouched, and place new steps around it. Where the new plan makes a ticked line wrong, say so in the
@@ -152,4 +153,4 @@ The file path. A table of the sections written. Then, and only where there is so
 conflicts by id, ordering findings, an Issue too big with the slices you would cut, a ticked line the
 new plan contradicts, the questions left unanswered, and what you scanned for.
 
-Close with `/issue push <id>`. Nothing was built and nothing was sent, so no status changes here.
+Close with `/issue-push <id>`. Nothing was built and nothing was sent, so no status changes here.

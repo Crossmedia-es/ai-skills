@@ -1,39 +1,45 @@
 ---
-id: {{id}}
-custom_id: {{custom_id}}
-title: {{title}}
-status: {{status}}
-type: {{type}}
-url: {{url}}
-date_updated: {{date_updated}}
-parent: {{parent}}
-blocked_by:
-  - {{id}} - {{title}} @{{status}}
-blocks:
-  - {{id}} - {{title}} @{{status}}
-subtasks:
-  - {{id}} - {{title}} @{{status}}
+list_id: ""
 ---
 
-<!--
-The shape of an Issue file in this project. Edit it to change how Issues are written locally.
+# Issues in this project
 
-Every key stays, filled or blank. Every `##` section below is sent to ClickUp as the Issue's
-description, in the order written here. Drop this comment when filling the template.
+The frontmatter above is this project's ClickUp config. Every Skill in the `issue` family reads
+`list_id` from it. It holds no secret — the API token lives in `~/.config/cup/config.json` — so this
+file is committed.
 
-`## Implementation` is last and stays last: `get` splits the description on that heading, so a
-section placed below it is swallowed into the checklist. A section with nothing true to say in it
-is left out rather than left empty.
+Everything between the markers below is the shape of an **Issue file**. `/issue-pull` copies it when
+it writes one. Edit it to change how Issues are written locally.
+
+Every key stays, filled or blank. Every `##` section is one part of the Issue's description, in the
+order written here. A section with nothing true to say in it is left out, not left empty.
 
 Implementation items read `- ✅ done thing` or `- ⬜ pending thing`, one short line each.
--->
 
-## Description
+Relation entries carry a markdown link to the related Issue file, so an editor can open it:
+`"[XP-1559](XP-1559-project-rules-command.md) - Project rules command @open"`. Keep the quotes — an
+unquoted `[` breaks the frontmatter.
 
-{{description}}
+<!-- template:start -->
+---
+id:
+custom_id:
+title:
+status:
+type:
+url:
+date_updated:
+parent:
+blocked_by:
+blocks:
+subtasks:
+---
+
+## Implementation
+
+## Specification
 
 ## Testing Decisions
 
 ## Out of Scope
-
-## Implementation
+<!-- template:end -->

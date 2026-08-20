@@ -40,16 +40,22 @@ _Avoid_: instruction, guideline, constraint, convention, standard
 
 **Issue**:
 One work item tracked in ClickUp. ClickUp's own API calls it a task, which is why the commands read
-`clickup-cli task …`.
+`cup task …`.
 _Avoid_: ticket, story, card, task
+
+**Draft**:
+An Issue file carrying no `id` — written locally, not yet in ClickUp. `/issue-new` raises it there
+and takes the id back; every other Skill in the family refuses to touch it.
+_Avoid_: new issue, unsaved issue, local-only
 
 **Issue file**:
 An Issue's local markdown copy, `docs/issues/<id>-<slug>.md`. Disposable — everything in it
-round-trips to ClickUp, so a finished one is deleted and rebuilt by `get` when the work reopens.
+round-trips to ClickUp, so a finished one is deleted and rebuilt by `/issue-pull` when the work
+reopens.
 _Avoid_: issue doc, local task, markdown ticket
 
 **Implementation checklist**:
-The `## Implementation` section of an Issue file. One artifact with a lifecycle: written before the
+The `## Implementation` section of an Issue file, and the first section in it. One artifact with a lifecycle: written before the
 build as unticked steps, ticked off by whichever skill implements the Issue, and pushed to ClickUp as
 part of the description, where it stands as the audit record.
 _Avoid_: notes, log, todo list
@@ -60,6 +66,8 @@ _Avoid_: notes, log, todo list
 - Each **Install channel** exposes a subset of the **Skills** — `npx skills` exposes all
   non-**Internal** ones; the plugin exposes those named in `.claude-plugin/plugin.json`
 - A **Framework** may ship a **Skill**; a **Skill** never ships a **Framework**
+- An **Issue file** is a **Draft** until `/issue-new` gives it an id; after that ClickUp owns the
+  record and the file is a copy of it
 
 ## Flagged ambiguities
 
