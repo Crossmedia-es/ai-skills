@@ -12,6 +12,12 @@
     "crossmedia"
   ],
   "skills": [
+    "./skills/issue",
+    "./skills/issue-new",
+    "./skills/issue-pull",
+    "./skills/issue-push",
+    "./skills/issue-refine",
+    "./skills/issue-setup",
     "./skills/project-rules"
   ]
 }
