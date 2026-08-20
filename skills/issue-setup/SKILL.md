@@ -11,8 +11,8 @@ metadata:
 `/issue-setup` runs once per project. It leaves behind one file, `docs/issues/TEMPLATE.md`, holding
 the `list_id` and the shape of an **Issue file**.
 
-Read [`../issue/CLICKUP-CLI.md`](../issue/CLICKUP-CLI.md). Read nothing else — no ADR, no source
-file, no other Skill. Where the `issue` Skill is missing, say so and stop.
+Read [`../issue/CLICKUP-CLI.md`](../issue/CLICKUP-CLI.md). That file and this one are the whole
+brief — read no third. Where the `issue` Skill is missing, say so and stop.
 
 ## Input
 

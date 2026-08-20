@@ -10,8 +10,8 @@ metadata:
 
 Bring ClickUp down to `docs/issues/`. Write nothing back.
 
-Read [`../issue/CLICKUP-CLI.md`](../issue/CLICKUP-CLI.md). Read nothing else — no ADR, no source
-file, no other Skill. Where the `issue` Skill is missing, say so and stop.
+Read [`../issue/CLICKUP-CLI.md`](../issue/CLICKUP-CLI.md). That file and this one are the whole
+brief — read no third. Where the `issue` Skill is missing, say so and stop.
 
 ## Input
 
@@ -22,9 +22,9 @@ Several arguments. `/issue-pull 154 155 XP-1554` is one run, and one failure nev
 | An id | That Issue. |
 | A path | The Issue whose id that file's frontmatter carries. |
 | A path with no `id` | Skip it. Say `/issue-new <path>`. |
+| An id ClickUp does not know | Skip it. Report it. Creating it is `/issue-new`. |
 | Nothing given | Every Issue file already in `docs/issues/`. Write no new file. |
-| `--status <name>` | Every Issue this project's list holds in that status. |
-| `--with-subtasks` | One level of subtasks under each id or status match. |
+| `--status <name>` or `--with-subtasks` | Read [`FILTERS.md`](FILTERS.md) first. |
 | An id and `--status` together | Say they ask for two different things. Stop. |
 
 ## Steps
@@ -40,50 +40,35 @@ Per Issue. Print one table at the end.
 3. **No file yet.** Build it from `docs/issues/TEMPLATE.md`. Write the fetched description whole,
    keeping its `##` headings and their order.
 4. **A file already.** Write `status`, title, `type`, `parent`, the relations and `date_updated`.
-   Rename the file where the title changed. Then compare, as below.
+   Rename the file where the title changed. Then check for drift.
 
-## Compare
+## Drift
 
-Join the file's `##` sections in the file's order — that is its description. Normalise both sides as
-under **Comparing**, then compare against `markdown_description`.
+A **drift** is one Issue whose local description and ClickUp's disagree. Join the file's `##` sections
+in the file's order — that is its description — normalise both sides as under **Comparing**, then
+compare against `markdown_description`.
 
-Equal: say nothing.
+No drift: say nothing.
 
-Different: show the difference and ask.
+Drift: show the difference and ask.
 
 - **Keep the local description** — change nothing. Offer `/issue-push <id>`.
 - **Take ClickUp's** — replace the file's sections with what came down.
 
-Never choose for the user. The local side may be an afternoon of refinement; ClickUp's may be a
+The user resolves a drift. The local side may be an afternoon of refinement; ClickUp's may be a
 colleague's correction.
-
-## `--status <name>`
-
-Run `cup tasks --list <list_id> --status "<name>" --all --json`, then the steps above on every id.
-`--all` means every assignee, not paging. Leave `--include-closed` off.
-
-Nothing came back is not an empty status. Run the procedure under **Statuses** and print what you
-learn.
-
-A listing returns subtasks alongside top-level Issues, so the table is the whole of the status.
-
-## `--with-subtasks`
-
-Run `cup subtasks <id> --json`, take the ids, run the steps above on each. They land flat in
-`docs/issues/`, carrying `parent`. One level — a subtask's own subtasks come from
-`/issue-pull <subtask> --with-subtasks`.
 
 ## Limits
 
-- Fetch the ids named. Never resolve one from the git branch or the repo.
+- Fetch the ids named. An id comes from the argument or a file's frontmatter, never from the git
+  branch.
 - Write Issue files for Issues that exist. Creating an Issue is `/issue-new`.
 
 ## Output
 
-One table — id, status before, status after, whether the description differed, path — then the
-failures. Nothing else.
+One table — id, status before, status after, drift, path — then the failures. Nothing else.
 
 ## Done when
 
 Every Issue named has a file; every file carries ClickUp's `status`, title, `type`, `parent`,
-relations and `date_updated`; and every difference was either resolved by an answer or left by one.
+relations and `date_updated`; and every drift was either resolved by an answer or left by one.

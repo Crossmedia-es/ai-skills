@@ -10,8 +10,8 @@ metadata:
 
 Give a **Draft** an id. This is the only Skill that creates an Issue in ClickUp.
 
-Read [`../issue/CLICKUP-CLI.md`](../issue/CLICKUP-CLI.md). Read nothing else — no ADR, no source
-file, no other Skill. Where the `issue` Skill is missing, say so and stop.
+Read [`../issue/CLICKUP-CLI.md`](../issue/CLICKUP-CLI.md). That file and this one are the whole
+brief — read no third. Where the `issue` Skill is missing, say so and stop.
 
 ## Input
 
@@ -30,6 +30,7 @@ Then, per file:
 | Carries no `id` | Raise it. |
 | Carries an `id` | Skip it. Say `/issue-push <id>`. |
 | Does not exist | Skip it. Print the path. |
+| A title whose slug matches a Draft on disk | Raise that Draft. Write no second file. |
 
 One failure never stops the rest.
 

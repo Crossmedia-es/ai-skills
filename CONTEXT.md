@@ -54,6 +54,11 @@ round-trips to ClickUp, so a finished one is deleted and rebuilt by `/issue-pull
 reopens.
 _Avoid_: issue doc, local task, markdown ticket
 
+**Drift**:
+One Issue whose local description and ClickUp's disagree. `/issue-pull` reports one and asks which
+side wins; `/issue-push` stops on one rather than overwrite it.
+_Avoid_: conflict, diff, mismatch, out of sync
+
 **Implementation checklist**:
 The `## Implementation` section of an Issue file, and the first section in it. One artifact with a lifecycle: written before the
 build as unticked steps, ticked off by whichever skill implements the Issue, and pushed to ClickUp as

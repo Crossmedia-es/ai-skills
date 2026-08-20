@@ -26,6 +26,8 @@ Given no mode, list these and stop.
 | `propose` | Propose rules from this session's corrections, and ask which to keep. |
 | `audit` | Report conflicts, overlaps, and rules to drop. |
 
+An argument that is not one of these four is not a mode. Say so, list them, and stop.
+
 ## setup
 
 1. Write `RULES.md` from [`templates/rules.md`](templates/rules.md), leaving an existing file alone.
@@ -73,8 +75,13 @@ declined by the user.
 ## audit
 
 1. Read `RULES.md`.
-2. Report three lists — rules that contradict each other, rules saying one thing across several
-   lines, and rules to drop.
-3. Edit only what the user approves.
+2. Test every rule against all three lists, and report each list with the rules it caught:
+   - **Contradicts** — two rules that cannot both be followed.
+   - **Overlaps** — one rule said across several items. Name the item that should survive.
+   - **Drop** — a **no-op**: a rule the agent already follows without being told, a rule about a
+     tool this repo no longer uses, or a rule so vague it fits any behaviour. Give the reason.
+3. Print the rule count. The file works by being read, and a long file stops being read.
+4. Edit only what the user approves.
 
-Done when every rule is either listed in that report or left alone.
+Done when every rule in the file has been tested against all three lists, and every rule the report
+names has been edited or left alone by the user's answer.
