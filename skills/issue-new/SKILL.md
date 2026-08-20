@@ -39,8 +39,9 @@ One failure never stops the rest.
 2. Read the file's frontmatter and every `##` section.
 3. Write the sections to a temp file outside the repo, in the file's own order. Skip a section whose
    body is empty.
-4. Run `cup create --list <list_id> --name "<title>" --assignee me --description-file <tmp>`. Add
-   `--parent <id>` only where the frontmatter carries one. Pass no `--status`. Delete `<tmp>`.
+4. Run `cup create --list <list_id> --name "<title>" --assignee <assignee_id> --description-file
+   <tmp>`. Add `--parent <id>` only where the frontmatter carries one. Pass no `--status`. Delete
+   `<tmp>`.
 5. Run `cup task <newId> --json`. Write `id`, `custom_id`, `url`, `status` and `date_updated` into
    the frontmatter.
 6. Rename the file to `docs/issues/<id>-<slug>.md` — `custom_id` where ClickUp assigned one, the

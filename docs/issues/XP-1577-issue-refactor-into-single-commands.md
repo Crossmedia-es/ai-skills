@@ -19,7 +19,7 @@ different rules and two created an Issue in ClickUp. This work splits it into fi
 job each — `/issue-setup`, `/issue-new`, `/issue-pull`, `/issue-push`, `/issue-refine` — over a
 shared contract in `skills/issue/CLICKUP-CLI.md`, with `issue` reduced to a router. A Draft, an
 Issue file carrying no `id`, becomes a legitimate state, and `/issue-new` is the single door from
-Draft to ClickUp. ADR 0003 records the split.
+Draft to ClickUp.
 
 ## Implementation
 
@@ -30,6 +30,5 @@ Draft to ClickUp. ADR 0003 records the split.
 - ✅ skills/issue-pull/SKILL.md — downloads, creates or refreshes the Issue file
 - ✅ skills/issue-push/SKILL.md — uploads the Issue file's description
 - ✅ skills/issue-refine/SKILL.md — interview, writes spec and checklist, no tracker
-- ✅ docs/adr/0003 — the split and the draft-before-tracker rule
 - ✅ list_id moves from .clickup.toml into docs/issues/TEMPLATE.md frontmatter
 - ✅ mise validate green and the family committed

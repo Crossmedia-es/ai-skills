@@ -26,11 +26,13 @@ argument is at the shell's mercy.
 ## Config
 
 `docs/issues/TEMPLATE.md` is this project's ClickUp config and the **Issue file**'s shape at once. Its
-frontmatter holds `list_id`, its `template` markers wrap the file shape, and it names the `##`
-sections — adding one is a change to that file. `/issue-setup` writes it, and it is committed: a list
-id is no secret.
+frontmatter holds `list_id` and `assignee_id`, its `template` markers wrap the file shape, and it
+names the `##` sections — adding one is a change to that file. `/issue-setup` writes it, and it is
+committed: neither id is a secret.
 
-`cup` never reads it. Take `list_id` from it and pass `--list`.
+`cup` never reads it. Take `list_id` from it and pass `--list`; take `assignee_id` and pass
+`--assignee`. `cup auth --json` returns the signed-in user's id as `user.id`, and `cup members --json`
+lists the rest, for a project filed under someone else.
 
 The token is the CLI's own, in `~/.config/cup/config.json`. So is the workspace:
 `cup config get teamId`.
@@ -45,11 +47,13 @@ never guessed.
 
 | Field | Owner |
 | --- | --- |
-| `status`, title, `type`, `parent`, relations | ClickUp. Reported here, changed in the UI. |
+| title, `type`, `parent`, relations | ClickUp. Reported here, changed in the UI. |
+| `status` | ClickUp, with one exception: `/issue-done` moves it to a status the user named in that run. |
 | the description | The Issue file. `/issue-push` sends it. |
 
-`cup update` will set a status, a title and a parent, and no Skill here passes those flags. A status
-pushed from a file is a status moved by whoever last ran a command.
+`cup update` will set a title and a parent too, and no Skill here passes those flags. A status pushed
+from a file is a status moved by whoever last ran a command — which is why the one exception asks
+first and reports the status ClickUp ended up with.
 
 ClickUp stores **one** description per Issue, and an Issue file's `##` sections in the file's own
 order are that description. There is no per-section API and no split to maintain.

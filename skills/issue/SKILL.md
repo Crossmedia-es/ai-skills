@@ -15,7 +15,9 @@ the work reopens.
 
 ## The family
 
-One job each. Every one of them reads [`CLICKUP-CLI.md`](CLICKUP-CLI.md) before its first step.
+One job each. The four that call `cup` — setup, new, pull, push — read
+[`CLICKUP-CLI.md`](CLICKUP-CLI.md) before their first step. `/issue-done` reads it too, since it
+pushes. `/issue-refine` and `/issue-verify` touch no tracker and need none of it.
 
 | Skill | Job |
 | --- | --- |
@@ -24,9 +26,12 @@ One job each. Every one of them reads [`CLICKUP-CLI.md`](CLICKUP-CLI.md) before 
 | `/issue-pull [id]…` | Download. Writes the Issue file for an Issue that has none, refreshes one that has. |
 | `/issue-push <id>…` | Upload. Sends an existing Issue file's description to an existing Issue. |
 | `/issue-refine <id>` | Interview the user, then write the Issue file's spec and checklist. Talks to no tracker. |
+| `/issue-verify <id>` | Check the Issue was built completely and as described. Reports; builds nothing. |
+| `/issue-done <id>` | Push, move the status, delete the file. The only Skill that writes a status. |
 
 Nothing else creates an Issue in ClickUp. `/issue-new` is the only one, which is why `/issue-push`
-refuses a file with no id and `/issue-pull` refuses to invent one.
+refuses a file with no id and `/issue-pull` refuses to invent one. Nothing else moves a status:
+`/issue-done` is the only one, and only to a status the user named in that run.
 
 ## read
 
