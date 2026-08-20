@@ -28,9 +28,12 @@ Each of these is a finding with a command attached, never an action taken here:
 
 | Found | Say |
 | --- | --- |
-| The Issue is too big for one build | Name the slices you would cut. `/issue-new` raises them. |
+| The Issue is too big for one build | Cut it into slices. Read [`SLICES.md`](SLICES.md). |
 | A sibling Issue conflicts | Name it by id. `/issue-refine <other-id>` fixes it there. |
+| An open Issue blocks this one | Name it by id and status. The build waits; this refinement does not. |
+| This Issue blocks another | Name it by id. A scope change here needs `/issue-refine <that-id>`. |
 | A term belongs in the glossary | Name it. Writing it is the user's call. |
+| The Specification is a position nobody has argued with | Say so, and offer `/grill-with-docs`. Absent, run one more round of step 5 aimed at the Specification. |
 | The refined Issue is ready to leave the laptop | `/issue-push <id>` |
 
 Edit one Issue file: the target's. The other Issue may be the correct one, and this Skill only heard
@@ -83,7 +86,12 @@ Read-only. Bring findings and open questions, not homework.
 - **The seam** — where is this proven? Prefer a seam the codebase already has, and the highest one
   that covers the behaviour. An Issue whose only honest check is "look at it" is not a defect: say so
   now, because finding it out after the build costs more.
-- **Order** — work this Issue assumes already exists. Name the Issue it rests on, by id and status.
+- **Dependencies** — take `blocked_by` and `blocks` off the frontmatter and resolve every id to a
+  status with `/issue read <id>`, which reports whether that status closes the Issue. Report each one:
+  an open `blocked_by` means the build waits, and every `blocks` entry is an Issue whose plan rests on
+  this one. A closed `blocked_by` blocks nothing — say so in one line and move on.
+- **Order** — work this Issue assumes already exists with no `blocked_by` recording it. Name the Issue
+  it rests on, by id and status, and say the edge is added in the ClickUp UI.
 - **Conflicts** — among the Issues read in step 2: two Issues changing the same file or identifier,
   a contradiction with something already built, duplicated work.
 - **Size** — could one agent build this in one pass, in twelve steps or fewer? If not, that is the
@@ -166,7 +174,7 @@ A line moved out of scope disappears from the plan, so give every item a home. P
 
 1. Search the Issues read in step 2 for one that already covers it. Found: name it by id in
    `## Out of Scope` — "covered by XP-1560" is a home.
-2. Not found: offer `/issue-new "<title>"` and say what that Issue would hold.
+2. Not found: offer a slice. Read [`SLICES.md`](SLICES.md).
 3. The user declines, or the item is not worth an Issue: leave it in `## Out of Scope` and say it has
    no home yet.
 
@@ -174,14 +182,17 @@ The user places these. `/issue-new` is their command to run.
 
 ## 7. Report
 
-The file path, and the line count against the 85-line ceiling. A table of the sections written. Then,
-and only where there is something to say: conflicts by id, ordering findings, the slices you would
-cut, a ticked line the new plan contradicts, the questions left unanswered, and what you scanned for.
+The file path, and the line count against the 85-line ceiling. A table of the sections written. Every
+Draft you wrote, by path. Every open `blocked_by` and every `blocks`, by id and status. Then, and only
+where there is something to say: conflicts by id, ordering findings, a ticked line the new plan
+contradicts, the questions left unanswered, and what you scanned for.
 
 Close with `/issue-push <id>`. Nothing was built and nothing was sent, so no status changes here.
 
 ## Done when
 
 The Issue file holds a Specification you could hand to a stranger, a checklist of twelve steps or
-fewer, a home for every out-of-scope item, and 85 lines or fewer in total — or the report names which
-of those the Issue cannot yet satisfy, and why.
+fewer, a home for every out-of-scope item, and 85 lines or fewer in total. Every `blocked_by` and
+`blocks` entry is resolved to a status and reported. Every slice the user agreed to is a Draft on
+disk, named in the report. Or the report names which of those the Issue
+cannot yet satisfy, and why.

@@ -20,6 +20,9 @@ longer document.
 
 Implementation items read `- ✅ done thing` or `- ⬜ pending thing`, one short line each.
 
+`linked` holds plain references — the Issue this one was sliced out of, or one it merely relates to.
+It implies no order and no ownership, unlike `parent` and `blocked_by`.
+
 Relation entries carry a markdown link to the related Issue file, so an editor can open it:
 `"[XP-1559](XP-1559-project-rules-command.md) - Project rules command @open"`. Keep the quotes — an
 unquoted `[` breaks the frontmatter.
@@ -37,6 +40,7 @@ parent:
 blocked_by:
 blocks:
 subtasks:
+linked:
 ---
 
 ## Specification

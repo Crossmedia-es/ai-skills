@@ -104,8 +104,14 @@ A dependency holds ids alone — `{task_id, depends_on, type}` — so take the d
 rather than the `type`. `task_id` is this Issue: `depends_on` goes under `blocked_by`. `depends_on` is
 this Issue: `task_id` goes under `blocks`.
 
-Read-only. `cup depend` and `cup link` would write them; nothing here calls either, because a
-half-applied graph edit is worse than none.
+`linked` is the plain reference — ClickUp's `linked_tasks`, written with `cup link <id> <other>`. It
+carries no order and no ownership.
+
+**Add, never remove.** `/issue-new` runs `cup link` for each entry a Draft's `linked` carries, and
+`--parent` for a `parent`. Nothing else writes a relation: `cup depend`, `cup link --remove` and every
+edit to an existing edge stay unused, because a dependency is one edge shared by two Issues and a
+half-applied graph edit is worse than none. Adding an edge destroys nothing, which is why that one is
+allowed.
 
 ## The Implementation checklist
 
