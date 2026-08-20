@@ -46,5 +46,4 @@ mise clear         # remove those links, back to zero
 `mise link-skills` is the fast loop for developing a skill: no installer, no copies, so an edit to
 `skills/<name>/SKILL.md` takes effect in the next session with nothing to re-run.
 
-See [AGENTS.md](AGENTS.md) for conventions, [CONTEXT.md](CONTEXT.md) for vocabulary, and
-[docs/adr/](docs/adr/) for why things are the way they are.
+See [AGENTS.md](AGENTS.md) for conventions and [CONTEXT.md](CONTEXT.md) for vocabulary.
