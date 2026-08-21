@@ -80,7 +80,7 @@ declined by the user.
    - **Overlaps** — one rule said across several items. Name the item that should survive.
    - **Drop** — a **no-op**: a rule the agent already follows without being told, a rule about a
      tool this repo no longer uses, or a rule so vague it fits any behaviour. Give the reason.
-3. Print the rule count. The file works by being read, and a long file stops being read.
+3. Print the rule count against the length the file opens with.
 4. Edit only what the user approves.
 
 Done when every rule in the file has been tested against all three lists, and every rule the report

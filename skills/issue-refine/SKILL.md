@@ -27,7 +27,8 @@ Each of these is a finding with a command attached, never an action taken here:
 | An open Issue blocks this one | Name it by id and status. The build waits; this refinement does not. |
 | This Issue blocks another | Name it by id. A scope change here needs `/issue-refine <that-id>`. |
 | A term belongs in the glossary | Name it. Writing it is the user's call. |
-| The Specification is a position nobody has argued with | Say so, and offer `/grill-with-docs`. Absent, run one more round of step 5 aimed at the Specification. |
+| The Specification is a position nobody has argued with | Say so, and offer to stress-test it. Declined, run one more round of step 5 aimed at the Specification. |
+| The plan is ready to build | `/issue-implement <id>` |
 | The refined Issue is ready to leave the laptop | `/issue-push <id>` |
 
 Edit one Issue file: the target's. The other Issue may be the correct one, and this Skill only heard
@@ -44,7 +45,7 @@ other. A parent whose subtasks all need refining is that many runs.
 
 ## 2. Read before asking
 
-Never ask what a document already answers. Read:
+The documents answer first, and the questions cover what they leave open. Read:
 
 - The Issue file whole, and every related Issue — `parent`, `subtasks`, `blocked_by`, `blocks`. One
   already in `docs/issues/` is read from disk; the rest come from `/issue-pull <id> --print`, which
@@ -72,6 +73,17 @@ take that verdict rather than reading the name — here and everywhere below.
 ## 4. Analyse
 
 Read-only. Bring findings and open questions, not homework.
+
+Label every finding, and carry the label with it:
+
+| Label | Means | Goes |
+| --- | --- | --- |
+| **must** | The build cannot start without it | Step 5, then `## Specification` |
+| **should** | The build is worse without it, and the user may disagree | Step 5, as a question |
+| **optional** | Your idea, and the Issue works without it | `## Out of Scope`, unasked |
+
+Only a **must** enters `## Specification` without the user agreeing to it. Most findings are
+**optional**, and labelling them honestly is the whole point of the label.
 
 - **Readiness** — could someone build this without inventing a spec? Name what is undecided:
   approach, scope, data shape, the files it touches.
@@ -127,9 +139,13 @@ it is why this Skill asks before it writes. Keep asking until you can state, in 
 without hedging, what the problem is and what the solution does. Until then the next round is never
 optional — a checklist written over a vague Specification is a plan for work nobody agreed to.
 
-**The ceiling.** Stop asking when the next round would only confirm detail you can settle yourself.
-An Issue whose Specification is already clear takes no rounds at all: say it is ready and go to step
-6. Never manufacture a question to look thorough.
+**The ceiling.** Five questions per round, and a sixth means the round is guessing. Stop asking when
+the next round would only confirm detail the Issue, `CONTEXT.md`, or the code has already settled. An
+Issue whose Specification is already clear takes no rounds at all: say it is ready and go to step 6.
+Never manufacture a question to look thorough.
+
+Detail that nobody has settled is not yours to settle. It is a **should** you ask about, or an
+**optional** that stays out of the Specification.
 
 ## 6. Write
 
@@ -143,6 +159,11 @@ others — a new section is a change to that file, not to this run.
 | `## Testing Decisions` | The seam from step 4, what passing there proves, and prior art for the test. Or, plainly, that no automated check settles it. |
 | `## Out of Scope` | What this Issue does not cover. This is what stops a build sprawling. |
 
+**Every sentence traces back.** A line in `## Specification` restates what the Issue said, what a
+document said, or what the user answered. A decision you took alone is not a requirement: it is an
+**optional** finding, and its home is `## Out of Scope`. Nothing enters the Specification because it
+would be better engineering.
+
 Leave out a section with nothing true to say in it. `## Specification` is the one exception: an Issue
 without one is not refined, so go back to step 5.
 
@@ -150,14 +171,17 @@ without one is not refined, so go back to step 5.
 complete — a section nobody finishes is a section nobody read.
 
 **Show every change before making it.** Where a section already holds text, show what changes and
-confirm. Someone wrote it, and what they wrote is evidence about what they meant.
+confirm. Someone wrote it, and what they wrote is evidence about what they meant. Propose edits
+against the text that is there — a section reissued in your own voice is a change nobody asked for,
+however much better it reads.
 
-### The two ceilings
+### The ceilings
 
-Both are tests of the Issue, not budgets for the document.
+Each is a test of the Issue, not a budget for the document.
 
 | Ceiling | First response |
 | --- | --- |
+| 15 lines in `## Specification` | Drop a decision that is not a **must**. Compressing the prose hides the scope instead of removing it. |
 | 85 lines, frontmatter included | Tighten the wording. Plain sentences cut most drafts by a third and lose nothing true. |
 | 12 checklist items | None. A thirteenth step is more work than one Issue holds. |
 
@@ -184,9 +208,10 @@ A line moved out of scope disappears from the plan, so give every item a home. P
 
 1. Search the Issues read in step 2 for one that already covers it. Found: name it by id in
    `## Out of Scope` — "covered by XP-1560" is a home.
-2. Not found: offer a slice. Read [`SLICES.md`](SLICES.md).
-3. The user declines, or the item is not worth an Issue: leave it in `## Out of Scope` and say it has
-   no home yet.
+2. Not found, and some later build cannot start without it: offer a slice. Read
+   [`SLICES.md`](SLICES.md).
+3. Anything else: leave it in `## Out of Scope` and say it has no home yet. No home is a complete
+   answer, and it costs less than an Issue nobody wanted.
 
 The user places these. `/issue-new` is their command to run.
 
@@ -195,7 +220,8 @@ The user places these. `/issue-new` is their command to run.
 The file path, and the line count against the ceiling. A table of the sections written. Every Draft
 you wrote, by path. Every open `blocked_by` and every `blocks`, by id and status. Then, and only
 where there is something to say: conflicts by id, ordering findings, a ticked line the new plan
-contradicts, the questions left unanswered, and what you scanned for.
+contradicts, the **optional** findings you left out, the questions left unanswered, and what you
+scanned for.
 
 That list is the whole report: no account of what the Skill did, and no summary of the Issue back to
 the person who just answered questions about it.
@@ -204,7 +230,8 @@ Close with `/issue-push <id>`. Nothing was built and nothing was sent, so no sta
 
 ## Done when
 
-The Issue file holds a Specification you could hand to a stranger, a checklist of twelve steps or
-fewer, a home for every out-of-scope item, and 85 lines or fewer in total. Every `blocked_by` and
+The Issue file holds a Specification you could hand to a stranger, every line of it traceable to the
+Issue, a document, or an answer the user gave. A checklist of twelve steps or fewer, a home or a
+stated absence of one for every out-of-scope item, and 85 lines or fewer in total. Every `blocked_by` and
 `blocks` entry is resolved to a status and reported. Every slice the user agreed to is a Draft on
 disk, named in the report. Or the report names which of those the Issue cannot yet satisfy, and why.

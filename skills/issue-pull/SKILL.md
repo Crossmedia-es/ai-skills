@@ -1,6 +1,6 @@
 ---
 name: issue-pull
-description: Download Issues into Issue files — writing the file where none exists, refreshing what ClickUp owns where one does. Takes several at once, and asks before it replaces a local description.
+description: Download Issues into Issue files, or print one with `--print` and write nothing. Use when a local Issue file is missing or stale, or when a question needs one Issue's description and status. Takes several at once.
 disable-model-invocation: false 
 ---
 

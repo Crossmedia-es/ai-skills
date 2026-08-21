@@ -20,7 +20,7 @@ run = "python3 scripts/skills.py sync"
 # Symlinks straight from `skills/` into the project's agent directories, with no installer
 # involved, so an edit to a Skill is live with nothing to re-run.
 [tasks."link-skills"]
-description = "Symlink this repo's skills into .claude, .agents and .pi for local testing."
+description = "Symlink this repo's skills into .claude, .agents and .pi, pruning links to Skills that are gone."
 run = "python3 scripts/skills.py link"
 
 # Deletes the install artifacts directly, and never runs `npx skills remove`. Reproduced 2026-08-17

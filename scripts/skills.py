@@ -233,6 +233,20 @@ def cmd_link() -> int:
     for agent_dir, targets in AGENT_DIRS.items():
         directory = ROOT / agent_dir
         directory.mkdir(parents=True, exist_ok=True)
+
+        # A renamed or deleted Skill leaves its link behind, pointing at nothing. Only a broken
+        # link into `skills/` is ours to remove: a live link is in use, and anything else is
+        # somebody else's.
+        if directory.is_dir():
+            for link in sorted(directory.iterdir()):
+                if not link.is_symlink() or link.exists():
+                    continue
+                target = os.readlink(link)
+                aimed = (directory / target).resolve()
+                if aimed == SKILLS_DIR or SKILLS_DIR in aimed.parents:
+                    link.unlink()
+                    print(f"PRUNE {rel(link)} -> {target} is gone  ({targets})")
+
         for skill in skills:
             link = directory / skill.name
             want = os.path.relpath(skill.dir, directory)

@@ -13,6 +13,7 @@
   ],
   "skills": [
     "./skills/issue-done",
+    "./skills/issue-implement",
     "./skills/issue-new",
     "./skills/issue-pull",
     "./skills/issue-push",

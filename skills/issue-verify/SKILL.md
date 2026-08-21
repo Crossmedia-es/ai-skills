@@ -48,8 +48,8 @@ not work to do here.
 **Complete** — every item Built, the Specification satisfied, the named check run and passing,
 nothing out of scope shipped. Say `/issue-done <id>`.
 
-**Incomplete** — anything else. Name what is Missing or Different, and stop there. Building it is a
-build; `/issue-refine <id>` reopens the plan if the plan was wrong.
+**Incomplete** — anything else. Name what is Missing or Different, and stop there.
+`/issue-implement <id>` builds them; `/issue-refine <id>` reopens the plan where the plan was wrong.
 
 Then offer to tick the `- ⬜ ` items you verified as Built. That is the only file this Skill changes,
 and only on a yes.
@@ -58,7 +58,7 @@ and only on a yes.
 
 - Verify what the Issue names. The rest of the repo is not this Issue's scope.
 - Evidence is a file, a symbol or a command's output. "It looks implemented" is Missing.
-- Report a gap. Closing it is `/issue-refine` or a build.
+- Report a gap. Closing it is `/issue-implement`, or `/issue-refine` where the plan was wrong.
 
 ## Output
 

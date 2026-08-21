@@ -1,6 +1,6 @@
 ---
 name: issue-push
-description: Send existing Issue files up to ClickUp as the Issue's description. Takes several ids at once, writes no other field, and stops on someone else's edit.
+description: Send an Issue file's sections up to ClickUp as the Issue's description. Use when local refinement or ticked steps need to reach the board. Takes several ids at once, writes no other field, and stops on someone else's edit.
 disable-model-invocation: false
 ---
 

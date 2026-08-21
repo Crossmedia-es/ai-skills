@@ -1,6 +1,6 @@
 ---
 name: issue-new
-description: Raise a Draft in ClickUp and rename its file with the assigned id. Takes titles or paths, several at once.
+description: Raise Drafts in ClickUp and rename each file with the id ClickUp assigns. Use when a local Issue needs creating on the board. Takes titles or paths, several at once.
 disable-model-invocation: false 
 ---
 

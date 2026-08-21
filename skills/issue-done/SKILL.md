@@ -31,13 +31,13 @@ One id per run. Finishing is three irreversible acts on one Issue, and a batch h
 Each step ends in an answer from the user. Read it before starting the next one.
 
 1. **Check the checklist.** Count the `- ⬜ ` items. One or more: say how many, name them, and say
-   `/issue-verify <id>`. Confirm before going on — an Issue closed over pending steps is a lie the
-   board keeps telling.
+   `/issue-implement <id>` builds them or `/issue-verify <id>` judges what is there. Confirm before
+   going on — an Issue closed over pending steps is a lie the board keeps telling.
 2. **Push.** Run `/issue-push <id>` and let it do the work. A **drift** stops this run: resolve it
    there and start again. Confirm ClickUp holds the description before step 3.
 3. **Move the status.** Run `cup tasks --list <list_id> --all --json` and collect the distinct
-   `status` values — that is the only way to learn what this list accepts. Offer them, marking which
-   read as review and which as closed, plus **leave it alone**. On an answer, run
+   `status` values. Offer them, marking which read as review and which as closed, plus
+   **leave it alone**. On an answer, run
    `cup update <id> --status "<name>"`, then `cup task <id> --json` and report the status ClickUp
    actually holds. A fuzzy match can land somewhere other than the name you passed.
 4. **Delete the file.** Show the path and confirm. On yes, delete it. On no, say the file stays and
