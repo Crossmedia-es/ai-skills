@@ -29,13 +29,16 @@ argument is at the shell's mercy.
 ## Config
 
 `docs/issues/TEMPLATE.md` is this project's ClickUp config and the **Issue file**'s shape at once. Its
-frontmatter holds `list_id` and `assignee_id`, its `template` markers wrap the file shape, and it
-names the `##` sections — adding one is a change to that file. `/issue-setup` writes it, and it is
-committed: neither id is a secret.
+frontmatter holds `space_id`, `list_id` and `assignee_id`, its `template` markers wrap the file
+shape, and it names the `##` sections — adding one is a change to that file. `/issue-setup` writes it,
+and it is committed: not one of the three ids is a secret.
 
 `cup` never reads it. Take `list_id` from it and pass `--list`; take `assignee_id` and pass
-`--assignee`. `cup auth --json` returns the signed-in user's id as `user.id`, and `cup members --json`
-lists the rest, for a project filed under someone else.
+`--assignee`; take `space_id` where a command wants a space, as `cup lists <spaceId>` does. A space is
+never re-picked from `cup spaces` while the file holds one.
+
+`cup auth --json` returns the signed-in user's id as `user.id`, and `cup members --json` lists the
+rest, for a project filed under someone else.
 
 The token is the CLI's own, in `~/.config/cup/config.json`. So is the workspace:
 `cup config get teamId`.

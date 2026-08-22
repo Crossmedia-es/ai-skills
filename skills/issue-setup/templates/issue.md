@@ -1,13 +1,15 @@
 ---
+space_id: ""
 list_id: ""
 assignee_id: ""
 ---
 
 # Issues in this project
 
-The frontmatter above is this project's ClickUp config. `list_id` is the list Issues are filed in;
-`assignee_id` is the ClickUp user every new Issue is assigned to. It holds no secret — the API token
-lives in `~/.config/cup/config.json` — so this file is committed.
+The frontmatter above is this project's ClickUp config. `list_id` is the list Issues are filed in,
+`space_id` is the space that holds it — what `cup lists <spaceId>` takes — and `assignee_id` is the
+ClickUp user every new Issue is assigned to. None of the three is a secret — the API token lives in
+`~/.config/cup/config.json` — so this file is committed.
 
 Everything between the markers below is the shape of an **Issue file**. `/issue-pull` copies it when
 it writes one. Edit it to change how Issues are written locally.

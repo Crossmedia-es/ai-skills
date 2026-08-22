@@ -12,8 +12,6 @@ blocks:
 subtasks:
 ---
 
-## Description
-
 ## Implementation
 
 - ✅ skills/project-rules/SKILL.md — modes setup, add, propose, audit
@@ -39,6 +37,29 @@ subtasks:
 - ✅ disable-model-invocation: true — the skill runs when the user asks for it and not otherwise
 - ✅ Dogfooded here: RULES.md, the AGENTS.md block, and the CLAUDE.md symlink are all in place
 - ✅ Shipped — no metadata.internal, and .claude-plugin/plugin.json lists ./skills/project-rules
-- ⬜ setup run end to end on a repo that is not this one
-- ⬜ propose and audit run on a repo with a RULES.md long enough to conflict
-- ⬜ Verified on an Agent target other than claude-code — codex, opencode, pi
+
+## Specification
+
+Repos in this catalogue had no consistent, low-overhead way to record and enforce the rules an
+agent should follow while working in them, so conventions got restated ad hoc or forgotten.
+
+`project-rules` is a Skill that manages one `RULES.md` per repo — a flat list, one rule per line,
+no topic headings, because headings would turn rules into islands an agent skims past rather than
+reads whole. `AGENTS.md` carries one pointer block, "Read RULES.md now", and `CLAUDE.md` symlinks
+to `AGENTS.md` so both agents follow the same file.
+
+Four modes: `setup` creates the file and wiring; `add` puts a user-requested rule straight into
+force, since the user asking is the decision; `propose` turns this session's corrections into
+candidate rules and asks before adding any; `audit` reports contradictions, overlaps, and no-ops,
+and edits only what the user approves. No mode command and no self-proposing behaviour, because
+`AskUserQuestion` is Claude Code-only and this Skill runs on every Agent target.
+
+## Testing Decisions
+
+No automated seam exists for this: the repo's only check, `mise validate`, verifies Skill layout
+and frontmatter, not behaviour. Verification is manual and unticked below. No prior art — this is
+the first Skill in the catalogue to carry this section.
+
+- ⬜ Run `setup` end to end on a repo that is not this one.
+- ⬜ Run `propose` and `audit` on a repo with a RULES.md long enough to conflict.
+- ⬜ Verify on an Agent target other than claude-code — codex, opencode, pi.
