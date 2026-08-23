@@ -49,7 +49,7 @@ Each step ends in an answer from the user. Read it before starting the next one.
    | --- | --- |
    | `## Specification` | Summarise to five lines or fewer: the problem, and what was built. |
    | `## Implementation` | Nothing at all. The ticked checklist is the record of what happened. |
-   | `## Testing Decisions` | Delete it. It instructed a build that is over. |
+   | `## Testing` | Delete it. It instructed a build that is over. |
    | `## Out of Scope` | Give every homeless item a home, below. |
 
    **The summary says only what the Specification already said.** Drop the detail the checklist
@@ -96,7 +96,7 @@ failures.
 
 `/issue-verify` has run and its verdict is Complete, or the user answered that the named gaps close
 anyway. The description ClickUp holds carries a Specification of five lines or fewer saying nothing
-new, the checklist untouched, no `## Testing Decisions`, and every out-of-scope item either naming
+new, the checklist untouched, no `## Testing`, and every out-of-scope item either naming
 an Issue or named in the report as going with the file. The status is the one the user named,
 confirmed by a fetch, or unchanged because they said so. The Issue file is deleted or kept by their
 answer.

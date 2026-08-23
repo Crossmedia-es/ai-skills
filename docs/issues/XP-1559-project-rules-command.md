@@ -54,7 +54,7 @@ candidate rules and asks before adding any; `audit` reports contradictions, over
 and edits only what the user approves. No mode command and no self-proposing behaviour, because
 `AskUserQuestion` is Claude Code-only and this Skill runs on every Agent target.
 
-## Testing Decisions
+## Testing
 
 No automated seam exists for this: the repo's only check, `mise validate`, verifies Skill layout
 and frontmatter, not behaviour. Verification is manual and unticked below. No prior art — this is

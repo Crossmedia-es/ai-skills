@@ -49,7 +49,7 @@ linked:
 
 ## Implementation
 
-## Testing Decisions
+## Testing
 
 ## Out of Scope
 <!-- template:end -->

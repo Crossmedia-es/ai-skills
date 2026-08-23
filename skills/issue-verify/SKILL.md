@@ -25,7 +25,7 @@ not work to do here.
 
 ## Steps
 
-1. Read the Issue file whole — `## Specification`, `## Implementation`, `## Testing Decisions`,
+1. Read the Issue file whole — `## Specification`, `## Implementation`, `## Testing`,
    `## Out of Scope`.
 2. **Every checklist item gets a verdict**, ticked or not. Find the file, symbol or command that
    proves it, and name it. A `- ✅ ` line is a claim, not evidence: verify it like the rest.
@@ -38,7 +38,7 @@ not work to do here.
 
 3. **Check the Specification against the behaviour.** The checklist is the sequence; the
    Specification is the promise. Code can satisfy every item and still not do what was described.
-4. **Run the check named in `## Testing Decisions`.** Report the command and its result. Where the
+4. **Run the check named in `## Testing`.** Report the command and its result. Where the
    Issue said no automated check settles it, say what you inspected instead.
 5. **Check `## Out of Scope` against what shipped.** Anything built that the Issue excluded is scope
    creep, and it is a finding whether or not it works.
@@ -68,5 +68,5 @@ findings, and the verdict. Nothing else.
 ## Done when
 
 Every checklist item carries a verdict backed by a named file, symbol or command, or a stated
-absence; the `## Testing Decisions` check has been run or its absence explained; and every
+absence; the `## Testing` check has been run or its absence explained; and every
 out-of-scope breach is named.

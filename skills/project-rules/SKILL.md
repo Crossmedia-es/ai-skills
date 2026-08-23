@@ -32,8 +32,6 @@ A user explicitly asking for a rule counts as the approval decision itself.
 
 Done when the rule exists in `RULES.md` as exactly one list item, and no other item duplicates or contradicts it.
 
-
-
 ## setup
 
 1. Write `RULES.md` from [`templates/rules.md`](templates/rules.md), leaving an existing file alone.

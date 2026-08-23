@@ -11,7 +11,3 @@ blocked_by:
 blocks:
 subtasks:
 ---
-
-## Description
-
-## Implementation
