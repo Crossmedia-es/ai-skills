@@ -23,7 +23,7 @@ One argument: a Skill name.
 
 ## Steps
 
-1. Read the file top to bottom, in the order it's written — frontmatter excluded, everything included.
+1. Read the file top to bottom, in the order it's written — frontmatter excluded, everything included. If you already read it, read it again for changes.
 2. Walk it one element at a time. For each one, write a heading naming what
    it is (include its line number, quote opening words, or name the section it sits under).
 3. Under that heading, write one bullet per decision that paragraph makes. A decision is a rule,
@@ -34,7 +34,7 @@ One argument: a Skill name.
    to every decision found, however minor it looks — a table row and a "done when" line are
    decisions too.
 6. Keep the bullets in the file's own order, section by section, top to bottom.
-7. At the end show a report where decisions are too verbose, unnedeed, can be compacted, contradicts or are duplicated based on the section they are declared.
+7. At the end show a report where instructions are too verbose, unnedeed, can be compacted, contradicts or are duplicated based on the section they are declared. Depending on the type on with `- ✅ ` for effective instruction, `- ❓ ` for a instructions can be unclear be the agent or `- ⛔️ ` for instructions that affects the purpose or performance of the skill.
 
 Done when every element in the Skill's file has a heading, and every decision
 in it appears underneath as its own bullet.
