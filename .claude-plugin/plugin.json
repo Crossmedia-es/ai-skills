@@ -1,6 +1,6 @@
 {
   "name": "crossmedia-skills",
-  "version": "0.1.5",
+  "version": "0.1.7",
   "description": "Cross-Media's agent skills.",
   "author": {
     "name": "Cross-Media"
@@ -12,8 +12,9 @@
     "crossmedia"
   ],
   "skills": [
-    "./skills/feat-implement",
+    "./skills/bump-ver",
     "./skills/feat-refine",
+    "./skills/feat-implement",
     "./skills/issue-done",
     "./skills/issue-new",
     "./skills/issue-pull",
