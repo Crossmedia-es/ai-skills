@@ -25,7 +25,14 @@ Read the whole file. Relevant to the issue are:
 
 The current issue is a full feature (e.g. "User authentication","verify command") — keep it scoped to that feature; any questions beyond the scope of the feature can be added to `Out of scope`. If the issue is too small to split, say to the user to run `/issue-refine` instead.
 
-Interview the user in **rounds** (max 5 questions per round). Each round, ask every question whose prerequisites are settled — number them, use the `/domain-modeling` skill if available, give a little bit of context on each question, talk in ASD-STE100 Simplified Technical English, and use the ubiquitous language from `CONTEXT.md`. Give your recommended answer:
+Interview the user in **rounds** (max 5 questions per round). Each round, ask every question whose prerequisites are settled — number them, use the `/domain-modeling` skill if available. 
+
+Response with this rules:
+- give a little bit of context on each question.
+- Talk in ASD-STE100 Simplified Technical English
+- Always use the ubiquitous language from `CONTEXT.md`. 
+
+Give your recommended answer:
 
 ```md
 ❓ **Q1** - **<title>**: <body, options if useful>
@@ -45,7 +52,7 @@ Split the feature in multiple issues, that are subtasks of the current feature. 
 
 Use the `docs/issues/TEMPLATE.md` template format. If it does not exists, say to the user. 
 
-Add a `Specification` on each issue with the scope of the task to create. This issue will be later refined individually.
+Add a `Specification` on each issue with the scope of the task to create. Each new subtask issue will be later refined individually.
 
 ## 5. Update the feature issue
 
@@ -59,4 +66,4 @@ Done when the feature have an Specification, at least one subtask issue, and the
 
 # Gotchas
 
-- The file cannot be more than 80 lines. If so, you broke the scope limit. Ask the user what to move to a new issues or to `Out of scope`
+- The feature issue file cannot be more than 80 lines. If so, you broke the scope limit. Ask the user what to move to a new issues or to `Out of scope`

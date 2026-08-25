@@ -14,7 +14,7 @@ Turn one Skill's prose into a checklist of decisions, in the file's own order.
 
 ## Input
 
-One argument: a Skill name.
+One argument: a Skill name. Recalling this skill means the user has updated the target skill and wants you to reread it before doing this skill work.
 
 | Check | Do |
 | --- | --- |
@@ -34,7 +34,8 @@ One argument: a Skill name.
    to every decision found, however minor it looks — a table row and a "done when" line are
    decisions too.
 6. Keep the bullets in the file's own order, section by section, top to bottom.
-7. At the end show a report where instructions are too verbose, unnedeed, can be compacted, contradicts or are duplicated based on the section they are declared. Depending on the type on with `- ✅ ` for effective instruction, `- ❓ ` for a instructions can be unclear be the agent or `- ⛔️ ` for instructions that affects the purpose or performance of the skill.
+7. At the end show a report where instructions are too verbose, unnedeed, can be compacted, contradicts or are duplicated based on the section they are declared. Depending on the type on with `- ✅ ` for effective instruction, `- ❓ ` for a instructions can be unclear be the agent or `- ⛔️ ` for instructions that affects the purpose or performance of the skill. Suggest solutions on the next item line on how to solve the found issues.
+
 
 Done when every element in the Skill's file has a heading, and every decision
 in it appears underneath as its own bullet.
