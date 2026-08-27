@@ -9,7 +9,7 @@ disable-model-invocation: true
 Turn one Skill's prose into a checklist of decisions, in the file's own order.
 
 ## Context
-- Skill folder: In order, the project's own skills folders (`.claude/skills/`,`.agents/skills/`, `.pi/skills/`) or the same ones at the `~/` folder.
+- Skill folder: In order, the project's own skills folders (`.claude/skills/`,`.agents/skills/`, `.pi/skills/`) or the same folders .
 - Element: Any block of instruction. A paragraph, prose, table or step-list. "done when" counts...
 
 ## Input

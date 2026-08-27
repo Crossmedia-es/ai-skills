@@ -2,6 +2,8 @@
 
 Cross-Media's skill catalogue. Vocabulary is defined in [CONTEXT.md](CONTEXT.md) — use those terms.
 
+Keep responses focused, brief, and concise. Keep disclaimers and caveats short, and spend most of the response on the main answer. End the response when the answer is complete — do not add a summary, offer, or closing remarks. Give a little context before diving in — enough that the answer stands on its own. Write in Simplified Technical English (the ASD-STE100 style used in aviation manuals): short sentences, one idea per sentence, plain everyday words, active voice, present tense. Pick one term for each concept and use only that term throughout — never switch between synonyms for the same thing.
+
 ## Commands
 
 - **Check everything:** `mise validate` — read-only, fails on drift.
