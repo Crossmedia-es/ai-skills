@@ -1,8 +1,7 @@
 ---
 name: issue-refine 
 description: Refine one Issue into a Specification and an Implementation checklist by reaching a shared understanding with the user. 
-metadata:
-  internal: true
+disable-model-invocation: false
 ---
 
 # Input

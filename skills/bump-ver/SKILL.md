@@ -1,7 +1,7 @@
 ---
 name: bump-ver
 description: Bump a semver version number in a manifest file (plugin.json, package.json, pyproject.toml, Cargo.toml). Defaults to a patch bump.
-disable-model-invocation: true
+disable-model-invocation: false
 ---
 
 Raise the `version` field in a project by one semver step.

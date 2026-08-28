@@ -1,8 +1,7 @@
 ---
 name: feat-refine 
 description: Refine one Feature issue into multiple smaller tasks with Specification by reaching a shared understand with the user. 
-metadata:
-  internal: true
+disable-model-invocation: false
 ---
 
 # Input

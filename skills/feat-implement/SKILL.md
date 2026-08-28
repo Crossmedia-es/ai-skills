@@ -1,7 +1,7 @@
 ---
 name: feat-implement
 description: Implements a feature, based on the spec set on the issue file.
-disable-model-invocation: true
+disable-model-invocation: false
 ---
 
 # Input

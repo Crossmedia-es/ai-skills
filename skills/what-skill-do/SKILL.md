@@ -1,7 +1,7 @@
 ---
 name: what-skill-do
 description: Break down any Skill currently loaded by the harness into a paragraph-by-paragraph list of the decisions it makes. Use to debug or understand a Skill, wherever it lives, decision by decision, rather than read its prose.
-disable-model-invocation: true
+disable-model-invocation: false
 ---
 
 # what-skill-do

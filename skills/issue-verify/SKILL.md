@@ -1,7 +1,7 @@
 ---
 name: issue-verify
 description: Check that an Issue was built completely and as described — every checklist item against the code, the Specification against the behaviour, and the Out of Scope against what shipped.
-disable-model-invocation: true
+disable-model-invocation: false
 ---
 
 # issue-verify
