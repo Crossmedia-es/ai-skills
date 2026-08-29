@@ -37,21 +37,7 @@ Dependent questions wait for a later round. Wait for answers before the next rou
 
 This step is done when no open questions remain and nothing is silently assumed. Confirm with the user before marking the issue refined and moving to the next.
 
-## 4. Testing checklist
-
-Propose a numbered list of test implementations for the current checklist. Each item is a test that validates the behavior of one or many items of the implementation checklist (max 10 test items). Check for the seams that can be tested.
-
-Each item states: the **kind of test** (unit / integration / e2e / manual), **what to verify** and the expected outcome — concrete enough that could execute it without asking questions. Use the implementation checklist template.
-
-Order: happy path first, then edge cases, then error/failure paths. Stay inside the issue's boundaries — behaviors marked out of scope get no tests here.
-
-If a behavior can't be tested at this issue's level (e.g. needs another slice first), ask the user if it should be moved to the out of scope section.
-
-At the end the user will decide which tests will be added to the checklist.
-
-An Implementation item with no test is an unconfirmed decision — you need at least one.
-
-## 5. Writing the issue
+## 4. Writing the issue
 
 Use the `docs/issues/TEMPLATE.md` template format. Add the issue result in this order:
 
@@ -61,20 +47,27 @@ Use the `docs/issues/TEMPLATE.md` template format. Add the issue result in this 
 
 ## Implementation 
 
-The checklist. Ordered, imperative, concrete steps, that the user can understand and can implement by itself, each independently verifiable. The order of the items is the implementation sequence. Think that each line could be a commit message. No more than 10 items per issue. The template for the checklist is
+The checklist. Ordered, imperative, concrete steps, that the user can understand and can implement by itself, each independently verifiable. The order of the items is the implementation sequence. Think that each line could be a commit message. No more than 10 items per issue.
+
+Each item lists the files it is expected to touch, on one `>` line: plain = edit, `+` = new file, `-` = deleted file. Look up the paths in the codebase yourself. Expected files are a forecast, not a contract — the implementer notes deviations. Use globs when more than 3 files.
+
+The template for the checklist is
 ```md
-`- ✅ Done task
-`- ⬜ Todo task `
+- ✅ Done task
+    > *[path/to/edited/test_file.ts] +[new/test_file.ts] -[deleted/test_file.ts]
+- ⬜ Todo task
+    > *[path/to/edit/file.ts] +[new/file.ts] -[delete/file.ts]
 ```
-
-## Testing
-
-Add the testing checklist here.
 
 ## Out of scope
 
 Add any work tasks that are gathered in this form but either belong to another issue (mention the id of the issue), or needs a requires it's own issue file.
 
+## 5. The handoff
+
+Tell the user the next step is `/test-plan <id>` to design and write the tests.
+
 # Gotchas
 
 - The file cannot be more than 80 lines.
+- Do not write a `## Testing` section here — that belongs to `/test-plan`.

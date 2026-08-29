@@ -49,7 +49,5 @@ linked:
 
 ## Implementation
 
-## Testing
-
 ## Out of Scope
 <!-- template:end -->
