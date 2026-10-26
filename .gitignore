@@ -14,6 +14,5 @@ skills-lock.json
 
 .claude/settings.local.json
 
-# `.clickup.toml` is obsolete — `list_id` now lives in `docs/issues/TEMPLATE.md`, which is committed.
-# The path stays ignored because copies written against the old clickup-cli carry an `[auth] token`.
-.clickup.toml
+# Design source files (PDFs, logo masters) — local only for now. xtheme ships its own copies.
+docs/design/

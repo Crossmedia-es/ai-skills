@@ -94,8 +94,8 @@ def check_links(skill: Skill) -> list[str]:
 
     Both failures look identical on disk and only bite after install: `npx skills` copies one
     Skill directory at a time, so a link out to a sibling points at a file that never landed.
-    Shared material is carried by the Skill that needs it, or written into the project by
-    `/issue-setup` — never reached across a directory boundary.
+    Shared material is carried by the Skill that needs it — never reached across a directory
+    boundary.
     """
     errors: list[str] = []
     home = skill.dir.resolve()

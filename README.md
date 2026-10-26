@@ -33,6 +33,9 @@ Pick one route or the other — installing both leaves you with every skill twic
   failure log, where every rule names the failure that caused it. Scaffolds `AGENTS.md` and
   `RULES.md`, adds rules while catching duplicates and contradictions, and prunes the ones that have
   stopped earning their place.
+- **[xtheme](skills/xtheme/SKILL.md)** — apply the Crossmedia design system to a project. Detects
+  the project's UI libraries, writes a design and a browser preview for approval, then builds the
+  tokens, logo, components and screens on top of those libraries.
 
 ## Working on this repo
 

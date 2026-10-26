@@ -1,0 +1,57 @@
+/* Crossmedia design tokens — the single source of every colour, font, radius and shadow.
+   Light values on :root, dark values on [data-theme="dark"]. Rules: SYSTEM.md. */
+
+:root {
+  --cm-bg:            #F4F5FA;
+  --cm-surface:       #FFFFFF;
+  --cm-surface-alt:   #FAFBFE;
+  --cm-border:        #E1E4F0;
+  --cm-border-soft:   #EEF0F7;
+  --cm-border-strong: #C9CEE4;
+  --cm-text:          #14163A;
+  --cm-text-2:        #4A4F72;
+  --cm-text-3:        #6B7194;
+  --cm-brand:         #272757;
+  --cm-brand-mid:     #40478D;
+  --cm-action:        #3B44A0;
+  --cm-accent:        #0A7C86;
+  --cm-selected:      #EEF0FA;
+
+  --cm-ok:      #145C40;  --cm-ok-bg:   #E4F3EC;  --cm-ok-dot:   #1B7F58;
+  --cm-warn:    #7D4707;  --cm-warn-bg: #FBEFDF;  --cm-warn-dot: #C77A10;
+  --cm-error:   #8F241C;  --cm-error-bg:#FBE9E7;  --cm-error-dot:#A72B22;
+
+  --cm-font-display: 'Montserrat', system-ui, sans-serif;
+  --cm-font-body:    'Montserrat', system-ui, sans-serif;
+  --cm-font-mono:    'IBM Plex Mono', ui-monospace, monospace;
+
+  --cm-r-chip: 6px;  --cm-r-control: 10px;  --cm-r-card: 14px;  --cm-r-sheet: 22px;
+  --cm-shadow-card:  0 1px 2px rgba(20, 22, 58, 0.04);
+  --cm-shadow-panel: -18px 0 50px rgba(20, 22, 58, 0.12);
+  --cm-shadow-pop:   0 24px 60px rgba(20, 22, 58, 0.18);
+}
+
+[data-theme="dark"] {
+  --cm-bg:            #0C0E1C;
+  --cm-surface:       #151830;
+  --cm-surface-alt:   #1C2040;
+  --cm-border:        #2A2F52;
+  --cm-border-soft:   #242849;
+  --cm-border-strong: #3C4270;
+  --cm-text:          #EDEEF7;
+  --cm-text-2:        #A2A8C6;
+  --cm-text-3:        #8F95B8;
+  --cm-brand:         #5761D6;
+  --cm-brand-mid:     #4A52A8;
+  --cm-action:        #8B95F0;
+  --cm-accent:        #46CFD8;
+  --cm-selected:      #262C55;
+
+  --cm-ok:      #7BD7AC;  --cm-ok-bg:   #16382B;  --cm-ok-dot:   #4FBF8B;
+  --cm-warn:    #E8B96A;  --cm-warn-bg: #3B2C10;  --cm-warn-dot: #E8B96A;
+  --cm-error:   #F0A9A2;  --cm-error-bg:#2A1817;  --cm-error-dot:#E5645A;
+
+  --cm-shadow-card:  none;
+  --cm-shadow-panel: -18px 0 50px rgba(0, 0, 0, 0.5);
+  --cm-shadow-pop:   0 24px 60px rgba(0, 0, 0, 0.55);
+}
